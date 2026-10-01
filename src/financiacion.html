@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Financiación - Deluxe Cars</title>
+    <link rel="icon" type="image/png" href="img/LogoDC.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+        .finance-card, .result-card {
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 1rem;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.1);
+        }
+        .result-card {
+            background: #0d1b2a;
+            color: white;
+        }
+        .result-
+        .form-control, .form-select {
+            border-radius: 0.7rem;
+            min-height: 44px;
+        }
+
+
+</style>
+    <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+
+<header class="finance-hero py-5">
+    <div class="container">
+        <h1 class="display-6 fw-bold mb-2">Calcula tu financiación</h1>
+        <p class="lead mb-0 text-white-50">Configura tu cuota mensual de forma sencilla y transparente.</p>
+    </div>
+</header>
+
+<main class="container my-5">
+    <div class="row g-4 align-items-stretch">
+        <div class="col-lg-7">
+            <section class="finance-card p-4 p-md-5 h-100">
+                <h2 class="h4 mb-4">Datos de la financiación</h2>
+                <form id="financeForm">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="price" class="form-label">Precio del coche (€)</label>
+                            <input type="number" class="form-control" id="price" min="1" step="100" value="25000" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="downPayment" class="form-label">Entrada (€)</label>
+                            <input type="number" class="form-control" id="downPayment" min="0" step="100" value="5000" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="rate" class="form-label">Interés anual (TIN %)</label>
+                            <select class="form-select" id="rate" required>
+                                <option value="6.5">6,5 % TIN</option>
+                                <option value="9.5" selected>9,5 % TIN</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="months" class="form-label">Plazo (meses)</label>
+                            <select class="form-select" id="months" required>
+                                <option value="12">12 meses</option>
+                                <option value="24">24 meses</option>
+                                <option value="36">36 meses</option>
+                                <option value="48">48 meses</option>
+                                <option value="60" selected>60 meses</option>
+                                <option value="72">72 meses</option>
+                                <option value="84">84 meses</option>
+                                <option value="96">96 meses</option>
+                                <option value="108">108 meses</option>
+                                <option value="120">120 meses (máximo)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="formError" class="alert alert-danger mt-4 d-none" role="alert"></div>
+                </form>
+            </section>
+        </div>
+
+        <div class="col-lg-5">
+            <section class="result-card p-4 p-md-5 h-100 d-flex flex-column justify-content-center">
+                <p class="text-white-50 mb-2">Tu cuota mensual estimada</p>
+                <div id="monthlyPayment" class="result-main mb-4">0,00 €</div>
+                <div class="d-flex justify-content-between border-bottom border-secondary py-2">
+                    <span class="text-white-50">Importe financiado</span>
+                    <strong id="financedAmount">0,00 €</strong>
+                </div>
+                <div class="d-flex justify-content-between border-bottom border-secondary py-2">
+                    <span class="text-white-50">Intereses totales</span>
+                    <strong id="totalInterest">0,00 €</strong>
+                </div>
+                <div class="d-flex justify-content-between py-2">
+                    <span class="text-white-50">Total a devolver</span>
+                    <strong id="totalPayment">0,00 €</strong>
+                </div>
+                <small class="text-white-50 mt-4">Cálculo orientativo. La oferta final dependerá de las condiciones de la entidad financiera.</small>
+            </section>
+        </div>
+    </div>
+</main>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const financeForm = document.getElementById('financeForm');
+    const priceInput = document.getElementById('price');
+    const downPaymentInput = document.getElementById('downPayment');
+    const rateInput = document.getElementById('rate');
+    const monthsInput = document.getElementById('months');
+    const formError = document.getElementById('formError');
+    const currency = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' });
+
+    function calculateFinancing() {
+        const price = Number(priceInput.value);
+        const downPayment = Number(downPaymentInput.value);
+        const annualRate = Number(rateInput.value);
+        const months = Number(monthsInput.value);
+        const financed = price - downPayment;
+
+        if (price <= 0 || downPayment < 0 || downPayment >= price || annualRate < 0 || annualRate > 30) {
+            formError.textContent = 'Introduce un precio válido y una entrada menor que el precio del coche. El interés debe estar entre 0 % y 30 %.';
+            formError.classList.remove('d-none');
+            return;
+        }
+
+        formError.classList.add('d-none');
+        const monthlyRate = annualRate / 100 / 12;
+        const monthlyPayment = monthlyRate === 0
+            ? financed / months
+            : financed * monthlyRate / (1 - Math.pow(1 + monthlyRate, -months));
+        const totalPayment = monthlyPayment * months;
+
+        document.getElementById('monthlyPayment').textContent = currency.format(monthlyPayment);
+        document.getElementById('financedAmount').textContent = currency.format(financed);
+        document.getElementById('totalInterest').textContent = currency.format(totalPayment - financed);
+        document.getElementById('totalPayment').textContent = currency.format(totalPayment);
+    }
+
+    financeForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        calculateFinancing();
+    });
+
+    [priceInput, downPaymentInput, rateInput, monthsInput].forEach(function (input) {
+        input.addEventListener('input', calculateFinancing);
+        input.addEventListener('change', calculateFinancing);
+    });
+
+    calculateFinancing();
+</script>
+    <script src="site.js"></script>
+</body>
+</html>

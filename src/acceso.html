@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Acceso - Deluxe Cars</title>
+    <link rel="icon" type="image/png" href="img/LogoDC.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+        .access-card {
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 1rem;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.12);
+        }
+        .form-control {
+            border-radius: 0.7rem;
+            min-height: 44px;
+        }
+
+
+</style>
+    <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+
+<header class="access-hero py-4">
+    <div class="container">
+        <h1 class="h2 fw-bold mb-1">Área de acceso</h1>
+        <p class="mb-0 text-white-50">Regístrate o inicia sesión para acceder a tu cuenta.</p>
+    </div>
+</header>
+
+<main class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-xl-6">
+            <section class="access-card p-4 p-md-5">
+                <div id="accessView">
+                    <div class="btn-group w-100 mb-4" role="group" aria-label="Tipo de acceso">
+                        <button type="button" class="btn btn-primary" data-view="login">Iniciar sesión</button>
+                        <button type="button" class="btn btn-outline-primary" data-view="register">Registrarme</button>
+                        <button type="button" class="btn btn-outline-primary" data-view="admin">Admin</button>
+                    </div>
+
+                    <form id="loginForm">
+                        <h2 class="h4 mb-3">Iniciar sesión</h2>
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control" id="loginEmail" autocomplete="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="loginPassword" autocomplete="current-password" required>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Recordarme en este dispositivo</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mt-2">Entrar</button>
+                    </form>
+
+                    <form id="registerForm" class="d-none">
+                        <h2 class="h4 mb-3">Crear una cuenta</h2>
+                        <div class="mb-3">
+                            <label for="registerName" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="registerName" autocomplete="name" maxlength="80" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerEmail" class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control" id="registerEmail" autocomplete="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerPassword" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="registerPassword" minlength="8"
+                                   autocomplete="new-password" required>
+                            <div class="form-text">Debe tener al menos 8 caracteres.</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mt-2">Crear cuenta</button>
+                    </form>
+
+                    <form id="adminForm" class="d-none">
+                        <h2 class="h4 mb-3">Acceso de administrador</h2>
+                        <div class="alert alert-warning small" role="note">
+                            Acceso de demostración: <strong>admin@deluxecars.com</strong> /
+                            <strong>Admin123!</strong>. No usar estas credenciales en producción.
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminEmail" class="form-label">Correo de administrador</label>
+                            <input type="email" class="form-control" id="adminEmail" autocomplete="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminPassword" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="adminPassword" autocomplete="current-password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mt-2">Acceder como admin</button>
+                    </form>
+
+                    <div id="feedback" class="alert d-none mt-4 mb-0" role="status" aria-live="polite"></div>
+                </div>
+
+                <div id="accountView" class="d-none">
+                    <h2 class="h4 mb-2" id="welcomeTitle"></h2>
+                    <p class="text-muted" id="accountDescription"></p>
+                    <div id="adminUsers" class="d-none">
+                        <h3 class="h5">Gestionar catálogo</h3>
+                        <p class="small text-muted">Los cambios se guardan en este navegador y aparecerán en la página Modelos.</p>
+                        <form id="addCarForm" class="row g-2 mb-4">
+                            <input type="hidden" id="editingCarId">
+                            <div class="col-md-6">
+                                <label for="carName" class="form-label">Modelo</label>
+                                <input type="text" id="carName" class="form-control" maxlength="80" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="carYear" class="form-label">Año</label>
+                                <input type="number" id="carYear" class="form-control" min="1900" max="2100" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="carPrice" class="form-label">Precio (€)</label>
+                                <input type="number" id="carPrice" class="form-control" min="1" step="1" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="carImage" class="form-label">Ruta o URL de imagen (opcional)</label>
+                                <input type="text" id="carImage" class="form-control" maxlength="300"
+                                       placeholder="img/mi-coche.png">
+                            </div>
+                            <div class="col-12">
+                                <label for="carDescription" class="form-label">Descripción para la ficha</label>
+                                <textarea id="carDescription" class="form-control" rows="2" maxlength="500"
+                                          placeholder="Gasolina · Sedán · Sport"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="carSpecs" class="form-label">Ficha técnica</label>
+                                <textarea id="carSpecs" class="form-control" rows="3" maxlength="1000"
+                                          placeholder="Un dato por línea, por ejemplo: Motor: 2.0 TFSI"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="carTags" class="form-label">Etiquetas del catálogo</label>
+                                <input type="text" id="carTags" class="form-control" maxlength="250"
+                                       placeholder="Deportivo, Premium, Tecnología">
+                                <div class="form-text">Separa las etiquetas con comas.</div>
+                            </div>
+                            <div class="col-12">
+                                <button id="saveCarButton" type="submit" class="btn btn-primary mt-2">Añadir coche</button>
+                                <button id="cancelCarEdit" type="button" class="btn btn-outline-secondary mt-2 d-none">Cancelar edición</button>
+                            </div>
+                        </form>
+                        <div id="carFeedback" class="alert d-none" role="status" aria-live="polite"></div>
+                        <div class="table-responsive">
+                            <table class="table table-sm align-middle">
+                                <thead><tr><th>Modelo</th><th>Año</th><th>Precio</th><th></th></tr></thead>
+                                <tbody id="carList"></tbody>
+                            </table>
+                        </div>
+                        <hr class="my-4">
+                        <h3 class="h5">Añadir y gestionar coches del inicio</h3>
+                        <p class="small text-muted">Marca los coches del catálogo que quieras mostrar en index, incluidos los que añadas. Para cambiar sus datos, usa «Editar» en el catálogo.</p>
+                        <div id="homeCarList" class="row g-2 mb-3"></div>
+                        <button id="saveHomeCars" type="button" class="btn btn-primary">Guardar coches del inicio</button>
+                        <div id="homeFeedback" class="alert d-none mt-3 mb-0" role="status" aria-live="polite"></div>
+                    </div>
+                    <button id="logoutButton" type="button" class="btn btn-outline-secondary mt-3">Cerrar sesión</button>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const USERS_KEY = 'deluxeCarsUsers';
+    const SESSION_KEY = 'deluxeCarsSession';
+    const ADMIN_EMAIL = 'admin@deluxecars.com';
+    const ADMIN_PASSWORD = 'Admin123!';
+    const CARS_KEY = 'deluxeCarsInventory';
+    const HOME_CARS_KEY = 'deluxeCarsHomeFeatured';
+    const defaultHomeCarIds = ['seat-leon-fr', 'ford-mustang', 'audi-q5', 'audi-rs3', 'bmw-serie-3'];
+    const catalogCars = [
+        { id: 'seat-leon-fr', name: 'Seat Leon FR', year: 2026, price: 38900, image: 'img/seatLeonFrMk42026.png', description: 'El SEAT León FR (Formula Racing) es un coche compacto de cinco puertas que combina una estética deportiva con un enfoque equilibrado para el uso diario.', specs: ['Motor: 1.5 eTSI / 115 CV', 'Combustible: Híbrido', 'Transmisión: Automática', 'Potencia: 115 CV', 'Puertas: 5', 'Aceleración: 10,4 s 0-100 km/h'], tags: ['Eficiente', 'Deportivo', 'Tecnología'] },
+        { id: 'ford-mustang', name: 'Ford Mustang', year: 2023, price: 58400, image: 'img/FordMustang2023.png', description: 'Clásico deportivo americano con motor V8 y comportamiento dinámico contundente.', specs: ['Motor: V8 5.0', 'Combustible: Gasolina', 'Transmisión: Automática', 'Potencia: 480 CV', 'Puertas: 2', 'Aceleración: 4,3 s 0-100 km/h'], tags: ['V8', 'Potencia', 'Icono'] },
+        { id: 'audi-q5', name: 'Audi Q5', year: 2022, price: 49200, image: 'img/AudiQ52022.png', description: 'SUV premium, cómoda y con buena eficiencia gracias a su versión híbrida.', specs: ['Motor: 2.0 TFSI / Híbrido', 'Combustible: Híbrido', 'Transmisión: Automática', 'Potencia: 265 CV', 'Puertas: 5', 'Aceleración: 6,1 s 0-100 km/h'], tags: ['SUV', 'Confort', 'Tecnología'] },
+        { id: 'bmw-serie-3', name: 'BMW Serie 3', year: 2024, price: 44800, image: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80', description: 'Berlina premium con un equilibrio ideal entre deportividad, confort y tecnología.', specs: ['Motor: 2.0 Diesel', 'Combustible: Diésel', 'Transmisión: Automática', 'Potencia: 190 CV', 'Puertas: 4', 'Aceleración: 7,5 s 0-100 km/h'], tags: ['Berlina', 'Premium', 'Elegancia'] },
+        { id: 'audi-rs3', name: 'Audi RS3', year: 2024, price: 74985, image: 'img/AudiRs32024.png', description: 'El Audi RS3 es un deportivo compacto de altas prestaciones, con un motor de cinco cilindros y 400 CV, aerodinámica avanzada y tracción total quattro con divisor de par (torque splitter).', specs: ['Motor: 2.5 TFSI', 'Combustible: Gasolina', 'Transmisión: Automática', 'Potencia: 400 CV', 'Puertas: 5', 'Aceleración: 3,8 s 0-100 km/h'], tags: ['Sport', 'Quattro', '400 CV'] },
+        { id: 'mercedes-c-class', name: 'Mercedes C-Class', year: 2025, price: 46900, image: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=900&q=80', description: 'Sedán de lujo con tecnología avanzada y un interior muy refinado.', specs: ['Motor: 2.0 Hybrid', 'Combustible: Híbrido', 'Transmisión: Automática', 'Potencia: 258 CV', 'Puertas: 4', 'Aceleración: 6,4 s 0-100 km/h'], tags: ['Sedán', 'Lujoso', 'Seguridad'] },
+        { id: 'volkswagen-golf-gti', name: 'Volkswagen Golf GTI', year: 2024, price: 36700, image: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=900&q=80', description: 'Hatchback deportivo con gran carácter, rapidez y un estilo muy reconocible.', specs: ['Motor: 2.0 TSI', 'Combustible: Gasolina', 'Transmisión: Manual', 'Potencia: 245 CV', 'Puertas: 5', 'Aceleración: 5,9 s 0-100 km/h'], tags: ['GTI', 'Compacto', 'Rendimiento'] }
+    ];
+    const accessView = document.getElementById('accessView');
+    const accountView = document.getElementById('accountView');
+    const feedback = document.getElementById('feedback');
+
+    function getUsers() {
+        const savedUsers = localStorage.getItem(USERS_KEY);
+        const users = savedUsers ? JSON.parse(savedUsers) : [];
+        if (!Array.isArray(users)) {
+            throw new Error('No se pudieron leer las cuentas guardadas. Borra los datos locales del sitio e inténtalo de nuevo.');
+        }
+        return users;
+    }
+
+    function getInventory() {
+        const savedInventory = localStorage.getItem(CARS_KEY);
+        const inventory = savedInventory ? JSON.parse(savedInventory) : { added: [], deleted: [], updated: {} };
+        if (!inventory || !Array.isArray(inventory.added) || !Array.isArray(inventory.deleted)) {
+            throw new Error('No se pudo leer el catálogo guardado en este navegador.');
+        }
+        if (!inventory.updated || typeof inventory.updated !== 'object' || Array.isArray(inventory.updated)) {
+            inventory.updated = {};
+        }
+        return inventory;
+    }
+
+    function showCarFeedback(message, type) {
+        const carFeedback = document.getElementById('carFeedback');
+        carFeedback.textContent = message;
+        carFeedback.className = 'alert alert-' + type;
+    }
+
+    function beginCarEdit(car) {
+        document.getElementById('editingCarId').value = car.id;
+        document.getElementById('carName').value = car.name;
+        document.getElementById('carYear').value = car.year;
+        document.getElementById('carPrice').value = car.price;
+        document.getElementById('carImage').value = car.image || '';
+        document.getElementById('carDescription').value = car.description || '';
+        document.getElementById('carSpecs').value = Array.isArray(car.specs) ? car.specs.join('\n') : '';
+        document.getElementById('carTags').value = Array.isArray(car.tags) ? car.tags.join(', ') : '';
+        document.getElementById('saveCarButton').textContent = 'Guardar cambios';
+        document.getElementById('cancelCarEdit').classList.remove('d-none');
+        document.getElementById('carName').focus();
+    }
+
+    function resetCarForm() {
+        document.getElementById('addCarForm').reset();
+        document.getElementById('editingCarId').value = '';
+        document.getElementById('saveCarButton').textContent = 'Añadir coche';
+        document.getElementById('cancelCarEdit').classList.add('d-none');
+    }
+
+    function renderCars() {
+        const inventory = getInventory();
+        const carList = document.getElementById('carList');
+        carList.replaceChildren();
+        const cars = catalogCars.filter(car => !inventory.deleted.includes(car.id))
+            .concat(inventory.added)
+            .map(car => ({ ...car, ...inventory.updated[car.id] }));
+
+        cars.forEach(car => {
+            const row = document.createElement('tr');
+            const nameCell = document.createElement('td');
+            const yearCell = document.createElement('td');
+            const priceCell = document.createElement('td');
+            const actionCell = document.createElement('td');
+            const editButton = document.createElement('button');
+            const deleteButton = document.createElement('button');
+            nameCell.textContent = car.name;
+            yearCell.textContent = car.year;
+            priceCell.textContent = new Intl.NumberFormat('es-ES', {
+                style: 'currency',
+                currency: 'EUR'
+            }).format(car.price);
+            editButton.type = 'button';
+            editButton.className = 'btn btn-outline-primary btn-sm me-1';
+            editButton.textContent = 'Editar';
+            editButton.addEventListener('click', () => beginCarEdit(car));
+            deleteButton.type = 'button';
+            deleteButton.className = 'btn btn-outline-danger btn-sm';
+            deleteButton.textContent = 'Eliminar';
+            deleteButton.addEventListener('click', () => {
+                try {
+                    const current = getInventory();
+                    if (car.id.startsWith('custom-')) {
+                        current.added = current.added.filter(item => item.id !== car.id);
+                    } else if (!current.deleted.includes(car.id)) {
+                        current.deleted.push(car.id);
+                    }
+                    delete current.updated[car.id];
+                    localStorage.setItem(CARS_KEY, JSON.stringify(current));
+                    renderCars();
+                    renderHomeCars();
+                    showCarFeedback('Coche eliminado del catálogo.', 'success');
+                } catch (error) {
+                    showCarFeedback(error.message || 'No se pudo eliminar el coche.', 'danger');
+                }
+            });
+            actionCell.append(editButton, deleteButton);
+            row.append(nameCell, yearCell, priceCell, actionCell);
+            carList.appendChild(row);
+        });
+    }
+
+    function renderHomeCars() {
+        const inventory = getInventory();
+        const storedFeatured = localStorage.getItem(HOME_CARS_KEY);
+        const featured = storedFeatured ? JSON.parse(storedFeatured) : defaultHomeCarIds;
+        if (!Array.isArray(featured) || featured.some(id => typeof id !== 'string')) {
+            throw new Error('No se pudo leer la selección de coches del inicio.');
+        }
+        const availableCars = catalogCars.filter(car => !inventory.deleted.includes(car.id))
+            .concat(inventory.added)
+            .map(car => ({ ...car, ...inventory.updated[car.id] }));
+        const list = document.getElementById('homeCarList');
+        list.replaceChildren();
+        availableCars.forEach(car => {
+            const column = document.createElement('div');
+            column.className = 'col-md-6';
+            const label = document.createElement('label');
+            label.className = 'form-check border rounded p-3 d-flex align-items-center gap-2';
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.className = 'form-check-input mt-0';
+            checkbox.value = car.id;
+            checkbox.checked = featured.includes(car.id);
+            const name = document.createElement('span');
+            name.textContent = car.name;
+            label.append(checkbox, name);
+            column.appendChild(label);
+            list.appendChild(column);
+        });
+    }
+
+    async function hashPassword(password, salt) {
+        if (!window.crypto || !window.crypto.subtle) {
+            throw new Error('Este navegador no permite crear cuentas en este contexto. Abre la web desde localhost o HTTPS.');
+        }
+        const data = new TextEncoder().encode(salt + password);
+        const digest = await window.crypto.subtle.digest('SHA-256', data);
+        return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
+    }
+
+    function showFeedback(message, type) {
+        feedback.textContent = message;
+        feedback.className = 'alert alert-' + type + ' mt-4 mb-0';
+    }
+
+    function showForm(view) {
+        document.querySelectorAll('#accessView form').forEach(form => form.classList.add('d-none'));
+        document.getElementById(view + 'Form').classList.remove('d-none');
+        document.querySelectorAll('[data-view]').forEach(button => {
+            const isActive = button.dataset.view === view;
+            button.className = isActive ? 'btn btn-primary' : 'btn btn-outline-primary';
+        });
+        feedback.classList.add('d-none');
+    }
+
+    function renderSession(session) {
+        accessView.classList.add('d-none');
+        accountView.classList.remove('d-none');
+        document.getElementById('welcomeTitle').textContent =
+            session.role === 'admin' ? 'Panel de administración' : '¡Hola, ' + session.name + '!';
+        document.getElementById('accountDescription').textContent =
+            session.role === 'admin'
+                ? 'Has accedido como administrador de demostración.'
+                : 'Has iniciado sesión como ' + session.email + '.';
+
+        const adminUsers = document.getElementById('adminUsers');
+        adminUsers.classList.toggle('d-none', session.role !== 'admin');
+        if (session.role === 'admin') {
+            renderCars();
+            renderHomeCars();
+        }
+    }
+
+    document.querySelectorAll('[data-view]').forEach(button => {
+        button.addEventListener('click', () => showForm(button.dataset.view));
+    });
+
+    document.getElementById('registerForm').addEventListener('submit', async event => {
+        event.preventDefault();
+        const name = document.getElementById('registerName').value.trim();
+        const email = document.getElementById('registerEmail').value.trim().toLowerCase();
+        const password = document.getElementById('registerPassword').value;
+        if (name.length === 0) {
+            showFeedback('Escribe tu nombre para crear la cuenta.', 'danger');
+            return;
+        }
+        try {
+            const users = getUsers();
+            if (users.some(user => user.email === email) || email === ADMIN_EMAIL) {
+                showFeedback('Ya existe una cuenta con ese correo electrónico.', 'danger');
+                return;
+            }
+            const salt = Array.from(window.crypto.getRandomValues(new Uint8Array(16)),
+                byte => byte.toString(16).padStart(2, '0')).join('');
+            const passwordHash = await hashPassword(password, salt);
+            users.push({ name, email, salt, passwordHash });
+            localStorage.setItem(USERS_KEY, JSON.stringify(users));
+            showFeedback('Cuenta creada. Ya puedes iniciar sesión.', 'success');
+            event.target.reset();
+            showForm('login');
+            showFeedback('Cuenta creada. Ya puedes iniciar sesión.', 'success');
+            document.getElementById('loginEmail').value = email;
+        } catch (error) {
+            showFeedback(error.message || 'No se pudo guardar la cuenta en este navegador.', 'danger');
+        }
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', async event => {
+        event.preventDefault();
+        const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+        const password = document.getElementById('loginPassword').value;
+        try {
+            const user = getUsers().find(account => account.email === email);
+            if (!user || await hashPassword(password, user.salt) !== user.passwordHash) {
+                showFeedback('El correo o la contraseña no son correctos.', 'danger');
+                return;
+            }
+            const session = { role: 'user', name: user.name, email: user.email };
+            sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
+            if (document.getElementById('rememberMe').checked) {
+                localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+            } else {
+                localStorage.removeItem(SESSION_KEY);
+            }
+            renderSession(session);
+        } catch (error) {
+            showFeedback(error.message || 'No se pudo iniciar sesión.', 'danger');
+        }
+    });
+
+    document.getElementById('adminForm').addEventListener('submit', event => {
+        event.preventDefault();
+        const email = document.getElementById('adminEmail').value.trim().toLowerCase();
+        const password = document.getElementById('adminPassword').value;
+        if (email !== ADMIN_EMAIL || password !== ADMIN_PASSWORD) {
+            showFeedback('Las credenciales de administrador no son correctas.', 'danger');
+            return;
+        }
+        const session = { role: 'admin', name: 'Administrador', email: ADMIN_EMAIL };
+        sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
+        localStorage.removeItem(SESSION_KEY);
+        renderSession(session);
+    });
+
+    document.getElementById('addCarForm').addEventListener('submit', event => {
+        event.preventDefault();
+        const name = document.getElementById('carName').value.trim();
+        const year = Number(document.getElementById('carYear').value);
+        const price = Number(document.getElementById('carPrice').value);
+        const image = document.getElementById('carImage').value.trim();
+        const description = document.getElementById('carDescription').value.trim();
+        const specs = document.getElementById('carSpecs').value.split('\n')
+            .map(spec => spec.trim()).filter(Boolean);
+        const tags = [...new Set(document.getElementById('carTags').value.split(',')
+            .map(tag => tag.trim()).filter(Boolean))];
+        const editingCarId = document.getElementById('editingCarId').value;
+        if (!name || !Number.isInteger(year) || year < 1900 || year > 2100 || !Number.isFinite(price) || price <= 0) {
+            showCarFeedback('Introduce un modelo, un año válido y un precio mayor que cero.', 'danger');
+            return;
+        }
+        try {
+            const inventory = getInventory();
+            const carData = { name, year, price, image, description, specs, tags };
+            if (editingCarId) {
+                if (editingCarId.startsWith('custom-')) {
+                    const car = inventory.added.find(item => item.id === editingCarId);
+                    if (!car) {
+                        throw new Error('No se encontró el coche que quieres modificar.');
+                    }
+                    Object.assign(car, carData);
+                } else {
+                    inventory.updated[editingCarId] = carData;
+                }
+            } else {
+                const id = 'custom-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
+                inventory.added.push({ id, ...carData });
+            }
+            localStorage.setItem(CARS_KEY, JSON.stringify(inventory));
+            resetCarForm();
+            renderCars();
+            renderHomeCars();
+            showCarFeedback(editingCarId
+                ? 'Cambios guardados en el catálogo.'
+                : 'Coche añadido. Ya aparece en el catálogo.', 'success');
+        } catch (error) {
+            showCarFeedback(error.message || 'No se pudo guardar el coche.', 'danger');
+        }
+    });
+
+    document.getElementById('cancelCarEdit').addEventListener('click', resetCarForm);
+
+    document.getElementById('saveHomeCars').addEventListener('click', () => {
+        const selected = Array.from(document.querySelectorAll('#homeCarList input:checked'))
+            .map(checkbox => checkbox.value);
+        try {
+            localStorage.setItem(HOME_CARS_KEY, JSON.stringify(selected));
+            const homeFeedback = document.getElementById('homeFeedback');
+            homeFeedback.textContent = 'Selección del inicio guardada.';
+            homeFeedback.className = 'alert alert-success mt-3 mb-0';
+        } catch (error) {
+            const homeFeedback = document.getElementById('homeFeedback');
+            homeFeedback.textContent = error.message || 'No se pudo guardar la selección del inicio.';
+            homeFeedback.className = 'alert alert-danger mt-3 mb-0';
+        }
+    });
+
+    document.getElementById('logoutButton').addEventListener('click', () => {
+        sessionStorage.removeItem(SESSION_KEY);
+        localStorage.removeItem(SESSION_KEY);
+        accountView.classList.add('d-none');
+        accessView.classList.remove('d-none');
+        showForm('login');
+    });
+
+    const existingSession = sessionStorage.getItem(SESSION_KEY) || localStorage.getItem(SESSION_KEY);
+    if (existingSession) {
+        const session = JSON.parse(existingSession);
+        if (session && (session.role === 'user' || session.role === 'admin')) {
+            renderSession(session);
+        }
+    }
+</script>
+    <script src="site.js"></script>
+</body>
+</html>

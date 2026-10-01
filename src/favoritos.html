@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favoritos - Concesionario</title>
+    <link rel="icon" type="image/png" href="img/LogoDC.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="watermark.css" rel="stylesheet">
+    <style>
+
+        .card {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+            overflow: hidden;
+        }
+        .card-img-top {
+            height: 210px;
+            object-fit: cover;
+        }
+        .favorite-button {
+            min-width: 2rem;
+            line-height: 1;
+            font-size: 1.15rem;
+        }
+
+</style>
+    <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+
+<header class="catalog-hero py-4 mb-4">
+    <div class="container">
+        <h1 class="h3 mb-1">Tus coches favoritos</h1>
+        <p class="mb-0 text-white-50">Aquí tendrás los modelos que más te interesan.</p>
+    </div>
+</header>
+
+<main class="container my-5">
+    <div id="loginNotice" class="card p-4 text-center d-none">
+        <h2 class="h4 mb-3">Inicia sesión para ver tus favoritos</h2>
+        <p class="text-muted">Inicia sesión en tu cuenta para acceder a tu lista de favoritos.</p>
+        <a href="acceso.html" class="btn btn-primary align-self-center">Ir a Acceso</a>
+    </div>
+    <div id="emptyNotice" class="card p-4 text-center d-none">
+        <h2 class="h4 mb-3">Todavía no tienes favoritos</h2>
+        <p class="text-muted">Guarda los coches que te gusten desde el catálogo para consultarlos aquí.</p>
+        <a href="modelos.html" class="btn btn-primary align-self-center">Ver catálogo</a>
+    </div>
+    <div id="favoritesGrid" class="row g-4"></div>
+</main>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="watermark.js"></script>
+<script>
+    const sessionText = sessionStorage.getItem('deluxeCarsSession')
+        || localStorage.getItem('deluxeCarsSession');
+    const favoritesGrid = document.getElementById('favoritesGrid');
+    const loginNotice = document.getElementById('loginNotice');
+    const emptyNotice = document.getElementById('emptyNotice');
+
+    function renderFavorites() {
+        favoritesGrid.replaceChildren();
+        if (!sessionText) {
+            loginNotice.classList.remove('d-none');
+            emptyNotice.classList.add('d-none');
+            return;
+        }
+
+        const session = JSON.parse(sessionText);
+        if (!session || typeof session.email !== 'string') {
+            loginNotice.classList.remove('d-none');
+            emptyNotice.classList.add('d-none');
+            return;
+        }
+        loginNotice.classList.add('d-none');
+        const favoritesKey = 'deluxeCarsFavorites:' + session.email.toLowerCase();
+        const savedFavorites = localStorage.getItem(favoritesKey);
+        const favorites = savedFavorites ? JSON.parse(savedFavorites) : [];
+        if (!Array.isArray(favorites)) {
+            throw new Error('No se pudo leer tu lista de favoritos.');
+        }
+        emptyNotice.classList.toggle('d-none', favorites.length > 0);
+
+        favorites.forEach(car => {
+            if (!car || typeof car.id !== 'string' || typeof car.name !== 'string') {
+                return;
+            }
+            const column = document.createElement('div');
+            column.className = 'col-sm-6 col-lg-4';
+            const card = document.createElement('div');
+            card.className = 'card h-100';
+            const image = document.createElement('img');
+            image.className = 'card-img-top';
+            image.alt = car.name;
+            image.src = typeof car.image === 'string' && /^(https?:\/\/|img\/)[^\s]+$/i.test(car.image)
+                ? car.image
+                : 'img/LogoDC.png';
+            const body = document.createElement('div');
+            body.className = 'card-body d-flex flex-column';
+            const heading = document.createElement('div');
+            heading.className = 'd-flex justify-content-between align-items-center mb-2';
+            const title = document.createElement('h2');
+            title.className = 'h5 mb-0';
+            title.textContent = car.name;
+            const year = document.createElement('span');
+            year.className = 'badge text-bg-primary';
+            year.textContent = String(car.year || '');
+            heading.append(title, year);
+
+            const description = document.createElement('p');
+            description.className = 'text-muted mb-2';
+            description.textContent = car.description || '';
+            const tags = document.createElement('div');
+            tags.className = 'mb-3';
+            (Array.isArray(car.tags) ? car.tags : []).forEach((tag, index) => {
+                const badge = document.createElement('span');
+                badge.className = 'badge text-bg-light' + (index < car.tags.length - 1 ? ' me-1' : '');
+                badge.textContent = tag;
+                tags.appendChild(badge);
+            });
+            const price = document.createElement('p');
+            price.className = 'text-primary fw-bold mt-auto mb-3';
+            price.textContent = 'Desde ' + new Intl.NumberFormat('es-ES').format(Number(car.price) || 0) + ' €';
+            const removeButton = document.createElement('button');
+            removeButton.type = 'button';
+            removeButton.className = 'btn btn-outline-danger btn-sm favorite-button align-self-start';
+            removeButton.innerHTML = '&#9829;';
+            removeButton.setAttribute('aria-label', 'Quitar ' + car.name + ' de favoritos');
+            removeButton.title = 'Quitar de favoritos';
+            removeButton.addEventListener('click', () => {
+                const updatedFavorites = favorites.filter(item => item.id !== car.id);
+                localStorage.setItem(favoritesKey, JSON.stringify(updatedFavorites));
+                renderFavorites();
+            });
+
+            body.append(heading, description, tags, price, removeButton);
+            card.append(image, body);
+            column.appendChild(card);
+            favoritesGrid.appendChild(column);
+        });
+    }
+
+    renderFavorites();
+</script>
+    <script src="site.js"></script>
+</body>
+</html>
