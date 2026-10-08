@@ -74,6 +74,26 @@
             padding-inline: 0.9rem;
         }
 
+        .brand-filter-dropdown {
+            flex: 1 1 10rem;
+        }
+
+        .filter-toolbar #filter {
+            flex: 1 1 10rem;
+            width: auto;
+        }
+
+        .brand-filter-menu {
+            width: 100%;
+            max-height: 16rem;
+            overflow-y: auto;
+        }
+
+        .brand-filter-option {
+            cursor: pointer;
+            padding: 0.4rem 0.85rem;
+        }
+
         .finance-result {
             background: #0d1b2a;
             color: white;
@@ -111,18 +131,34 @@
 
 <main class="container mb-5">
     <div class="row g-2 mb-4 filter-toolbar align-items-center">
-        <div class="col-md-8">
+        <div class="col-lg-5">
             <input id="search" class="form-control search-bar" placeholder="Buscar por marca o modelo...">
         </div>
-        <div class="col-md-4 d-flex gap-2 align-items-center">
-            <select id="filter" class="form-select compact-filter">
+        <div class="col-lg-7 d-flex flex-wrap gap-2 align-items-center">
+            <select id="filter" class="form-select compact-filter flex-grow-1">
                 <option value="">Filtrar por año</option>
                 <option value="2026">2026</option>
                 <option value="2025">2025</option>
                 <option value="2024">2024</option>
                 <option value="2023">2023</option>
                 <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
             </select>
+            <div class="dropdown brand-filter-dropdown">
+                <button id="brandFilterButton" type="button" class="form-select compact-filter text-start"
+                        data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"
+                        aria-label="Filtrar por una o varias marcas">
+                    Filtrar por marca
+                </button>
+                <div id="brandFilterOptions" class="dropdown-menu brand-filter-menu">
+                    <button id="clearBrandsBtn" type="button" class="dropdown-item small" hidden>
+                        Quitar filtros de marca
+                    </button>
+                </div>
+            </div>
             <button id="clearBtn" class="btn btn-outline-secondary compact-action">Limpiar</button>
             <button id="showAllBtn" class="btn btn-primary compact-action">Mostrar todo</button>
         </div>
@@ -447,6 +483,62 @@
     const filter = document.getElementById('filter');
     const clearBtn = document.getElementById('clearBtn');
     const showAllBtn = document.getElementById('showAllBtn');
+    const brandFilterOptions = document.getElementById('brandFilterOptions');
+    const brandFilterButton = document.getElementById('brandFilterButton');
+    const clearBrandsBtn = document.getElementById('clearBrandsBtn');
+    const selectedBrands = new Set();
+
+    function getCarBrand(card) {
+        const title = card.querySelector('.card-title').textContent.trim();
+        const knownBrands = ['Volkswagen', 'Mercedes', 'Audi', 'BMW', 'Ford', 'Seat'];
+        const brand = knownBrands.find(name => title.toLowerCase().startsWith(name.toLowerCase()));
+        return brand || title.split(/\s+/)[0];
+    }
+
+    function renderBrandFilters() {
+        const cards = Array.from(document.querySelectorAll('.car-card'));
+        const brands = [...new Set(cards.map(getCarBrand))]
+            .filter(Boolean)
+            .sort((first, second) => first.localeCompare(second, 'es'));
+
+        brandFilterOptions.replaceChildren();
+        brands.forEach(function (brand) {
+            const label = document.createElement('label');
+            label.className = 'dropdown-item brand-filter-option';
+            const checkbox = document.createElement('input');
+            checkbox.className = 'form-check-input me-2';
+            checkbox.type = 'checkbox';
+            checkbox.value = brand;
+            checkbox.checked = selectedBrands.has(brand);
+            checkbox.addEventListener('change', function () {
+                if (checkbox.checked) {
+                    selectedBrands.add(brand);
+                } else {
+                    selectedBrands.delete(brand);
+                }
+                renderSelectedBrands();
+                applyFilters();
+            });
+            label.append(checkbox, document.createTextNode(brand));
+            brandFilterOptions.appendChild(label);
+        });
+        if (selectedBrands.size > 0) {
+            const clearOption = document.createElement('div');
+            clearOption.className = 'dropdown-divider my-1';
+            brandFilterOptions.appendChild(clearOption);
+        }
+        clearBrandsBtn.className = 'dropdown-item small';
+        brandFilterOptions.appendChild(clearBrandsBtn);
+        renderSelectedBrands();
+    }
+
+    function renderSelectedBrands() {
+        const selectedCount = selectedBrands.size;
+        brandFilterButton.textContent = selectedCount
+            ? 'Marcas seleccionadas (' + selectedCount + ')'
+            : 'Filtrar por marca';
+        clearBrandsBtn.hidden = selectedCount === 0;
+    }
 
     function applyFilters() {
         const q = search.value.trim().toLowerCase();
@@ -459,7 +551,8 @@
             const yearTag = card.querySelector('.badge-soft') ? card.querySelector('.badge-soft').textContent.trim() : '';
             const matchesQ = !q || title.includes(q) || meta.includes(q);
             const matchesYear = !year || yearTag === year;
-            card.style.display = (matchesQ && matchesYear) ? '' : 'none';
+            const matchesBrand = selectedBrands.size === 0 || selectedBrands.has(getCarBrand(card));
+            card.style.display = (matchesQ && matchesYear && matchesBrand) ? '' : 'none';
         });
     }
 
@@ -468,11 +561,20 @@
     clearBtn.addEventListener('click', function () {
         search.value = '';
         filter.value = '';
+        selectedBrands.clear();
+        renderBrandFilters();
         applyFilters();
     });
     showAllBtn.addEventListener('click', function() {
         search.value = '';
         filter.value = '';
+        selectedBrands.clear();
+        renderBrandFilters();
+        applyFilters();
+    });
+    clearBrandsBtn.addEventListener('click', function () {
+        selectedBrands.clear();
+        renderBrandFilters();
         applyFilters();
     });
 
@@ -635,6 +737,8 @@
         card.appendChild(cardBody);
         document.getElementById('carsGrid').appendChild(card);
     });
+
+    renderBrandFilters();
     applyFilters();
 
     function applyCatalogPrice(card) {
