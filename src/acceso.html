@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Acceso - Deluxe Cars</title>
     <link rel="icon" type="image/png" href="img/LogoDC.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
 
         .access-card {
@@ -83,7 +83,7 @@
                     <form id="adminForm" class="d-none">
                         <h2 class="h4 mb-3">Acceso de administrador</h2>
                         <div class="alert alert-warning small" role="note">
-                            Acceso de demostración: <strong>admin@admin.com</strong> /
+                            Acceso de demostración: <strong>admin@deluxecars.com</strong> /
                             <strong>admin</strong>. No usar estas credenciales en producción.
                         </div>
                         <div class="mb-3">
@@ -169,29 +169,21 @@
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="catalog-data.js"></script>
 <script>
     const USERS_KEY = 'deluxeCarsUsers';
     const SESSION_KEY = 'deluxeCarsSession';
-    const ADMIN_EMAIL = 'admin@admin.com';
+    const ADMIN_EMAIL = 'admin@deluxecars.com';
     const ADMIN_PASSWORD = 'admin';
     const CARS_KEY = 'deluxeCarsInventory';
     const HOME_CARS_KEY = 'deluxeCarsHomeFeatured';
     const defaultHomeCarIds = ['seat-leon-fr', 'ford-mustang', 'audi-q5', 'audi-rs3', 'bmw-serie-3'];
-    const catalogCars = [
-        { id: 'seat-leon-fr', name: 'Seat Leon FR', year: 2026, price: 38900, image: 'img/seatLeonFrMk42026.png', description: 'El SEAT León FR (Formula Racing) es un coche compacto de cinco puertas que combina una estética deportiva con un enfoque equilibrado para el uso diario.', specs: ['Motor: 1.5 eTSI / 115 CV', 'Combustible: Híbrido', 'Transmisión: Automática', 'Potencia: 115 CV', 'Puertas: 5', 'Aceleración: 10,4 s 0-100 km/h'], tags: ['Eficiente', 'Deportivo', 'Tecnología'] },
-        { id: 'ford-mustang', name: 'Ford Mustang', year: 2023, price: 58400, image: 'img/FordMustang2023.png', description: 'Clásico deportivo americano con motor V8 y comportamiento dinámico contundente.', specs: ['Motor: V8 5.0', 'Combustible: Gasolina', 'Transmisión: Automática', 'Potencia: 480 CV', 'Puertas: 2', 'Aceleración: 4,3 s 0-100 km/h'], tags: ['V8', 'Potencia', 'Icono'] },
-        { id: 'audi-q5', name: 'Audi Q5', year: 2022, price: 49200, image: 'img/AudiQ52022.png', description: 'SUV premium, cómoda y con buena eficiencia gracias a su versión híbrida.', specs: ['Motor: 2.0 TFSI / Híbrido', 'Combustible: Híbrido', 'Transmisión: Automática', 'Potencia: 265 CV', 'Puertas: 5', 'Aceleración: 6,1 s 0-100 km/h'], tags: ['SUV', 'Confort', 'Tecnología'] },
-        { id: 'bmw-serie-3', name: 'BMW Serie 3', year: 2024, price: 44800, image: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80', description: 'Berlina premium con un equilibrio ideal entre deportividad, confort y tecnología.', specs: ['Motor: 2.0 Diesel', 'Combustible: Diésel', 'Transmisión: Automática', 'Potencia: 190 CV', 'Puertas: 4', 'Aceleración: 7,5 s 0-100 km/h'], tags: ['Berlina', 'Premium', 'Elegancia'] },
-        { id: 'audi-rs3', name: 'Audi RS3', year: 2024, price: 74985, image: 'img/AudiRs32024.png', description: 'El Audi RS3 es un deportivo compacto de altas prestaciones, con un motor de cinco cilindros y 400 CV, aerodinámica avanzada y tracción total quattro con divisor de par (torque splitter).', specs: ['Motor: 2.5 TFSI', 'Combustible: Gasolina', 'Transmisión: Automática', 'Potencia: 400 CV', 'Puertas: 5', 'Aceleración: 3,8 s 0-100 km/h'], tags: ['Sport', 'Quattro', '400 CV'] },
-        { id: 'mercedes-c-class', name: 'Mercedes C-Class', year: 2025, price: 46900, image: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=900&q=80', description: 'Sedán de lujo con tecnología avanzada y un interior muy refinado.', specs: ['Motor: 2.0 Hybrid', 'Combustible: Híbrido', 'Transmisión: Automática', 'Potencia: 258 CV', 'Puertas: 4', 'Aceleración: 6,4 s 0-100 km/h'], tags: ['Sedán', 'Lujoso', 'Seguridad'] },
-        { id: 'volkswagen-golf-gti', name: 'Volkswagen Golf GTI', year: 2024, price: 36700, image: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=900&q=80', description: 'Hatchback deportivo con gran carácter, rapidez y un estilo muy reconocible.', specs: ['Motor: 2.0 TSI', 'Combustible: Gasolina', 'Transmisión: Manual', 'Potencia: 245 CV', 'Puertas: 5', 'Aceleración: 5,9 s 0-100 km/h'], tags: ['GTI', 'Compacto', 'Rendimiento'] },
-        { id: 'bmw-m3', name: 'BMW M3', year: 2024, price: 100000, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/BMW_M3_Competition_%28G80%29_1X7A0170.jpg/960px-BMW_M3_Competition_%28G80%29_1X7A0170.jpg', description: 'Berlina deportiva de altas prestaciones con motor de seis cilindros y tracción integral M xDrive.', specs: ['Motor: 3.0 TwinPower Turbo', 'Combustible: Gasolina', 'Transmisión: Automática', 'Tracción: M xDrive', 'Potencia: 510 CV', 'Puertas: 4', 'Aceleración: 3,5 s 0-100 km/h'], tags: ['M', 'M xDrive', '510 CV'] }
-    ];
     const accessView = document.getElementById('accessView');
     const accountView = document.getElementById('accountView');
     const feedback = document.getElementById('feedback');
 
+    // Lee las cuentas guardadas en el navegador y comprueba que tengan el formato esperado.
     function getUsers() {
         const savedUsers = localStorage.getItem(USERS_KEY);
         const users = savedUsers ? JSON.parse(savedUsers) : [];
@@ -201,6 +193,7 @@
         return users;
     }
 
+    // Carga los coches añadidos, eliminados o modificados en el panel de administración.
     function getInventory() {
         const savedInventory = localStorage.getItem(CARS_KEY);
         const inventory = savedInventory ? JSON.parse(savedInventory) : { added: [], deleted: [], updated: {} };
@@ -213,12 +206,14 @@
         return inventory;
     }
 
+    // Muestra un mensaje después de añadir, editar o eliminar un coche.
     function showCarFeedback(message, type) {
         const carFeedback = document.getElementById('carFeedback');
         carFeedback.textContent = message;
         carFeedback.className = 'alert alert-' + type;
     }
 
+    // Rellena el formulario con los datos del coche que se va a editar.
     function beginCarEdit(car) {
         document.getElementById('editingCarId').value = car.id;
         document.getElementById('carName').value = car.name;
@@ -233,6 +228,7 @@
         document.getElementById('carName').focus();
     }
 
+    // Deja el formulario listo para añadir un coche nuevo.
     function resetCarForm() {
         document.getElementById('addCarForm').reset();
         document.getElementById('editingCarId').value = '';
@@ -240,6 +236,7 @@
         document.getElementById('cancelCarEdit').classList.add('d-none');
     }
 
+    // Actualiza la tabla de coches del panel de administración.
     function renderCars() {
         const inventory = getInventory();
         const carList = document.getElementById('carList');
@@ -248,6 +245,7 @@
             .concat(inventory.added)
             .map(car => ({ ...car, ...inventory.updated[car.id] }));
 
+        // Crea una fila con el coche y sus acciones de edición y borrado.
         cars.forEach(car => {
             const row = document.createElement('tr');
             const nameCell = document.createElement('td');
@@ -265,10 +263,12 @@
             editButton.type = 'button';
             editButton.className = 'btn btn-outline-primary btn-sm me-1';
             editButton.textContent = 'Editar';
+            // Carga este coche en el formulario cuando se pulsa Editar.
             editButton.addEventListener('click', () => beginCarEdit(car));
             deleteButton.type = 'button';
             deleteButton.className = 'btn btn-outline-danger btn-sm';
             deleteButton.textContent = 'Eliminar';
+            // Elimina el coche guardado y actualiza la tabla y la portada.
             deleteButton.addEventListener('click', () => {
                 try {
                     const current = getInventory();
@@ -292,6 +292,7 @@
         });
     }
 
+    // Muestra las casillas para elegir qué coches aparecen en la portada.
     function renderHomeCars() {
         const inventory = getInventory();
         const storedFeatured = localStorage.getItem(HOME_CARS_KEY);
@@ -304,6 +305,7 @@
             .map(car => ({ ...car, ...inventory.updated[car.id] }));
         const list = document.getElementById('homeCarList');
         list.replaceChildren();
+        // Añade una casilla por coche para elegir los destacados.
         availableCars.forEach(car => {
             const column = document.createElement('div');
             column.className = 'col-md-6';
@@ -322,6 +324,7 @@
         });
     }
 
+    // Crea una huella digital de la contraseña para no guardarla como texto normal.
     async function hashPassword(password, salt) {
         if (!window.crypto || !window.crypto.subtle) {
             throw new Error('Este navegador no permite crear cuentas en este contexto. Abre la web desde localhost o HTTPS.');
@@ -331,11 +334,13 @@
         return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
     }
 
+    // Muestra un mensaje de resultado en los formularios de acceso.
     function showFeedback(message, type) {
         feedback.textContent = message;
         feedback.className = 'alert alert-' + type + ' mt-4 mb-0';
     }
 
+    // Cambia entre los formularios de inicio de sesión, registro y administrador.
     function showForm(view) {
         document.querySelectorAll('#accessView form').forEach(form => form.classList.add('d-none'));
         document.getElementById(view + 'Form').classList.remove('d-none');
@@ -346,6 +351,7 @@
         feedback.classList.add('d-none');
     }
 
+    // Enseña la cuenta iniciada y, si es administrador, carga sus herramientas.
     function renderSession(session) {
         accessView.classList.add('d-none');
         accountView.classList.remove('d-none');
@@ -364,10 +370,12 @@
         }
     }
 
+    // Cambia al formulario elegido por el usuario.
     document.querySelectorAll('[data-view]').forEach(button => {
         button.addEventListener('click', () => showForm(button.dataset.view));
     });
 
+    // Valida el registro, guarda la cuenta y prepara el formulario para iniciar sesión.
     document.getElementById('registerForm').addEventListener('submit', async event => {
         event.preventDefault();
         const name = document.getElementById('registerName').value.trim();
@@ -388,7 +396,6 @@
             const passwordHash = await hashPassword(password, salt);
             users.push({ name, email, salt, passwordHash });
             localStorage.setItem(USERS_KEY, JSON.stringify(users));
-            showFeedback('Cuenta creada. Ya puedes iniciar sesión.', 'success');
             event.target.reset();
             showForm('login');
             showFeedback('Cuenta creada. Ya puedes iniciar sesión.', 'success');
@@ -398,6 +405,7 @@
         }
     });
 
+    // Comprueba las credenciales y guarda la sesión del usuario.
     document.getElementById('loginForm').addEventListener('submit', async event => {
         event.preventDefault();
         const email = document.getElementById('loginEmail').value.trim().toLowerCase();
@@ -421,6 +429,7 @@
         }
     });
 
+    // Inicia la sesión de demostración del administrador.
     document.getElementById('adminForm').addEventListener('submit', event => {
         event.preventDefault();
         const email = document.getElementById('adminEmail').value.trim().toLowerCase();
@@ -435,6 +444,7 @@
         renderSession(session);
     });
 
+    // Añade un coche nuevo o guarda los cambios de uno existente.
     document.getElementById('addCarForm').addEventListener('submit', event => {
         event.preventDefault();
         const name = document.getElementById('carName').value.trim();
@@ -480,9 +490,12 @@
         }
     });
 
+    // Cancela la edición y limpia el formulario.
     document.getElementById('cancelCarEdit').addEventListener('click', resetCarForm);
 
+    // Guarda la selección de coches destacados de la portada.
     document.getElementById('saveHomeCars').addEventListener('click', () => {
+        // Guarda los identificadores de las casillas seleccionadas.
         const selected = Array.from(document.querySelectorAll('#homeCarList input:checked'))
             .map(checkbox => checkbox.value);
         try {
@@ -497,6 +510,7 @@
         }
     });
 
+    // Cierra la sesión y vuelve al formulario de acceso.
     document.getElementById('logoutButton').addEventListener('click', () => {
         sessionStorage.removeItem(SESSION_KEY);
         localStorage.removeItem(SESSION_KEY);

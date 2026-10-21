@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <title>Catálogo de coches</title>
     <link rel="icon" type="image/png" href="img/LogoDC.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="watermark.css" rel="stylesheet">
     <style>
 
@@ -22,7 +22,14 @@
             object-fit: cover;
         }
 
-        .card-
+        .car-card[data-car-id="seat-ibiza-fr"] .card-img-top {
+            object-position: center 68%;
+        }
+
+        .car-card[data-car-id="seat-leon-fr"] .card-img-top,
+        .seat-leon-fr-modal-image {
+            object-position: center 66%;
+        }
 
         .card-title {
             font-size: 1.08rem;
@@ -167,7 +174,7 @@
     <div id="carsGrid" class="row g-4">
         <div class="col-sm-6 col-lg-4 car-card" data-car-id="seat-leon-fr">
             <div class="card h-100">
-                <img src="img/seatLeonFrMk42026.png" class="card-img-top" alt="Seat Leon FR">
+                <img src="img/seatLeonFrMk42026.jpeg" class="card-img-top" alt="Seat Leon FR">
                 <div class="card-body d-flex flex-column">
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <h5 class="card-title mb-0">Seat Leon FR</h5>
@@ -188,10 +195,108 @@
                                 data-year="2026"
                                 data-desc="El SEAT León FR (Formula Racing) es un coche compacto de cinco puertas que combina una estética deportiva con un enfoque equilibrado para el uso diario."
                                 data-price="38.900 €"
-                                data-img="img/seatLeonFrMk42026.png"
+                                data-img="img/seatLeonFrMk42026.jpeg"
                                 data-specs="Motor: 1.5 eTSI / 115 CV|Combustible: Híbrido|Transmisión: Automática|Potencia: 115 CV|Puertas: 5|Aceleración: 10,4 s 0-100 km/h">
                             Ficha
                         </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-4 car-card" data-car-id="golf-tsi-2018">
+            <div class="card h-100">
+                <img src="img/GolfTSIMk7.52018-card.jpeg" class="card-img-top" alt="Volkswagen Golf TSI">
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h5 class="card-title mb-0">Volkswagen Golf TSI</h5>
+                        <span class="badge badge-soft">2018</span>
+                    </div>
+                    <p class="text-muted mb-2">Gasolina · Hatchback · Deportivo</p>
+                    <div class="mb-3">
+                        <span class="badge text-bg-light me-1">TSI</span>
+                        <span class="badge text-bg-light me-1">Compacto</span>
+                        <span class="badge text-bg-light">Rendimiento</span>
+                    </div>
+                    <p class="price mb-3">Desde 28.900 €</p>
+                    <div class="mt-auto d-flex justify-content-start align-items-center gap-2">
+                        <a href="contacto.html" class="btn btn-primary btn-sm">Solicitar</a>
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#specModal"
+                                data-title="Volkswagen Golf TSI"
+                                data-year="2018"
+                                data-desc="***"
+                                data-price="28.900 €"
+                                data-img="img/GolfTSIMk7.52018-card.jpeg"
+                                data-specs="Motor: 1.4 TSI|Combustible: Gasolina|Transmisión: Manual|Potencia: 130 CV|Puertas: 5|Aceleración: 9,1 s 0-100 km/h">
+                            Ficha
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-4 car-card" data-car-id="seat-ibiza-fr">
+            <div class="card h-100">
+                <img src="img/SeatIbiza6L.jpeg" class="card-img-top" alt="Seat Ibiza FR">
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h5 class="card-title mb-0">Seat Ibiza FR</h5>
+                        <span class="badge badge-soft">***</span>
+                    </div>
+                    <p class="text-muted mb-2">Diesel · *** · ***</p>
+                    <div class="mb-3">
+                        <span class="badge text-bg-light me-1">TDI</span>
+                        <span class="badge text-bg-light me-1">Compacto</span>
+                        <span class="badge text-bg-light">Rendimiento</span>
+                    </div>
+                    <p class="price mb-3">Desde ***€</p>
+                    <div class="mt-auto d-flex justify-content-start align-items-center gap-2">
+                        <a href="contacto.html" class="btn btn-primary btn-sm">Solicitar</a>
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#specModal"
+                                data-title="Seat Ibiza FR"
+                                data-year="***"
+                                data-desc="***"
+                                data-price="*** €"
+                                data-img="img/SeatIbiza6L.jpeg"
+                                data-specs="Motor: *** TDI|Combustible: Diesel|Transmisión: Manual|Potencia: *** CV|Puertas: 5|Aceleración: *** s 0-100 km/h">
+                            Ficha
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-4 car-card" data-car-id="audi-rs3">
+            <div class="card h-100">
+                <img src="img/AudiRs32024.png" class="card-img-top" alt="Audi RS3">
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h5 class="card-title mb-0">Audi RS3</h5>
+                        <span class="badge badge-soft">2024</span>
+                    </div>
+                    <p class="card-text text-muted mb-2">Gasolina · Sportback · Deportivo</p>
+                    <div class="mb-3">
+                        <span class="badge text-bg-light me-1">Sport</span>
+                        <span class="badge text-bg-light me-1">Quattro</span>
+                        <span class="badge text-bg-light">400 CV</span>
+                    </div>
+                    <p class="price mb-3" data-base-price="74985">Desde 74.985 €</p>
+                    <div class="mt-auto d-flex justify-content-between">
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#carModal"
+                                data-title="Audi RS3" data-year="2024"
+                                data-desc="El Audi RS3 es un deportivo compacto de altas prestaciones, con un motor de cinco cilindros y 400 CV, aerodinámica avanzada y tracción total quattro con divisor de par (torque splitter)."
+                                data-price="74.985 €" data-img="img/AudiRs32024.png"
+                        >Ver detalles</button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#specModal"
+                                data-title="Audi RS3"
+                                data-year="2024"
+                                data-desc="El Audi RS3 es un deportivo compacto de altas prestaciones, con un motor de cinco cilindros y 400 CV, aerodinámica avanzada y tracción total quattro con divisor de par (torque splitter)."
+                                data-price="74.985 €"
+                                data-img="img/AudiRs32024.png"
+                                data-specs="Motor: 2.5 TFSI|Combustible: Gasolina|Transmisión: Automática|Potencia: 400 CV|Puertas: 5|Aceleración: 3,8 s 0-100 km/h"
+                        >Ficha</button>
                     </div>
                 </div>
             </div>
@@ -263,7 +368,7 @@
 
         <div class="col-sm-6 col-lg-4 car-card" data-car-id="bmw-serie-3">
             <div class="card h-100">
-                <img src="" class="card-img-top" alt="BMW Serie 3">
+                <img src="img/BmwSerie3-2024.png" class="card-img-top" alt="BMW Serie 3">
                 <div class="card-body d-flex flex-column">
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <h5 class="card-title mb-0">BMW Serie 3</h5>
@@ -284,7 +389,7 @@
                                 data-year="2024"
                                 data-desc="Berlina premium con un equilibrio ideal entre deportividad, confort y tecnología."
                                 data-price="44.800 €"
-                                data-img="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80"
+                                data-img="img/BMWSerie32024.png"
                                 data-specs="Motor: 2.0 Diesel|Combustible: Diésel|Transmisión: Automática|Potencia: 190 CV|Puertas: 4|Aceleración: 7,5 s 0-100 km/h">
                             Ficha
                         </button>
@@ -295,7 +400,7 @@
 
         <div class="col-sm-6 col-lg-4 car-card" data-car-id="mercedes-c-class">
             <div class="card h-100">
-                <img src="" class="card-img-top" alt="Mercedes C-Class">
+                <img src="img/MercedesCClass-2025.png" class="card-img-top" alt="Mercedes C-Class">
                 <div class="card-body d-flex flex-column">
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <h5 class="card-title mb-0">Mercedes C-Class</h5>
@@ -316,7 +421,7 @@
                                 data-year="2025"
                                 data-desc="Sedán de lujo con tecnología avanzada y un interior muy refinado."
                                 data-price="46.900 €"
-                                data-img="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=900&q=80"
+                                data-img="img/MercedesCClass-2025.png"
                                 data-specs="Motor: 2.0 Hybrid|Combustible: Híbrido|Transmisión: Automática|Potencia: 258 CV|Puertas: 4|Aceleración: 6,4 s 0-100 km/h">
                             Ficha
                         </button>
@@ -327,7 +432,7 @@
 
         <div class="col-sm-6 col-lg-4 car-card" data-car-id="volkswagen-golf-gti">
             <div class="card h-100">
-                <img src="" class="card-img-top" alt="Volkswagen Golf GTI">
+                <img src="img/GolfGti2025.png" class="card-img-top" alt="Volkswagen Golf GTI">
                 <div class="card-body d-flex flex-column">
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <h5 class="card-title mb-0">Volkswagen Golf GTI</h5>
@@ -348,7 +453,7 @@
                                 data-year="2024"
                                 data-desc="Hatchback deportivo con gran carácter, rapidez y un estilo muy reconocible."
                                 data-price="36.700 €"
-                                data-img="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=900&q=80"
+                                data-img="img/GolfGti2025.png"
                                 data-specs="Motor: 2.0 TSI|Combustible: Gasolina|Transmisión: Manual|Potencia: 245 CV|Puertas: 5|Aceleración: 5,9 s 0-100 km/h">
                             Ficha
                         </button>
@@ -389,8 +494,31 @@
             </div>
         </div>
     </div>
+
     </div>
 </main>
+
+<template id="catalogCarTemplate">
+    <div class="col-sm-6 col-lg-4 car-card">
+        <div class="card h-100">
+            <img class="card-img-top" alt="">
+            <div class="card-body d-flex flex-column">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="card-title mb-0"></h5>
+                    <span class="badge badge-soft"></span>
+                </div>
+                <p class="text-muted mb-2"></p>
+                <div class="mb-3"></div>
+                <p class="price mb-3"></p>
+                <div class="mt-auto d-flex justify-content-start align-items-center gap-2">
+                    <a href="contacto.html" class="btn btn-primary btn-sm">Solicitar</a>
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#specModal">Ficha</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
 
 <div class="modal fade" id="specModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -476,18 +604,18 @@
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
 <script src="watermark.js"></script>
 <script>
     const search = document.getElementById('search');
     const filter = document.getElementById('filter');
     const clearBtn = document.getElementById('clearBtn');
-    const showAllBtn = document.getElementById('showAllBtn');
     const brandFilterOptions = document.getElementById('brandFilterOptions');
     const brandFilterButton = document.getElementById('brandFilterButton');
     const clearBrandsBtn = document.getElementById('clearBrandsBtn');
     const selectedBrands = new Set();
 
+    // Obtiene la marca a partir del nombre que aparece en la tarjeta.
     function getCarBrand(card) {
         const title = card.querySelector('.card-title').textContent.trim();
         const knownBrands = ['Volkswagen', 'Mercedes', 'Audi', 'BMW', 'Ford', 'Seat'];
@@ -495,6 +623,7 @@
         return brand || title.split(/\s+/)[0];
     }
 
+    // Crea las casillas de filtro a partir de las marcas presentes en el catálogo.
     function renderBrandFilters() {
         const cards = Array.from(document.querySelectorAll('.car-card'));
         const brands = [...new Set(cards.map(getCarBrand))]
@@ -510,6 +639,7 @@
             checkbox.type = 'checkbox';
             checkbox.value = brand;
             checkbox.checked = selectedBrands.has(brand);
+            // Actualiza la selección de marcas y vuelve a filtrar los coches.
             checkbox.addEventListener('change', function () {
                 if (checkbox.checked) {
                     selectedBrands.add(brand);
@@ -532,6 +662,7 @@
         renderSelectedBrands();
     }
 
+    // Actualiza el texto del botón y muestra u oculta la opción de quitar marcas.
     function renderSelectedBrands() {
         const selectedCount = selectedBrands.size;
         brandFilterButton.textContent = selectedCount
@@ -540,11 +671,13 @@
         clearBrandsBtn.hidden = selectedCount === 0;
     }
 
+    // Muestra solo los coches que coinciden con la búsqueda, el año y las marcas.
     function applyFilters() {
         const q = search.value.trim().toLowerCase();
         const year = filter.value;
         const cards = document.querySelectorAll('.car-card');
 
+        // Oculta las tarjetas que no coinciden con los filtros.
         cards.forEach(card => {
             const title = card.querySelector('.card-title').textContent.toLowerCase();
             const meta = card.querySelector('.text-muted').textContent.toLowerCase();
@@ -558,20 +691,18 @@
 
     search.addEventListener('input', applyFilters);
     filter.addEventListener('change', applyFilters);
-    clearBtn.addEventListener('click', function () {
+    // Restablece todos los filtros; lo usan los botones Limpiar y Mostrar todo.
+    function clearFilters() {
         search.value = '';
         filter.value = '';
         selectedBrands.clear();
         renderBrandFilters();
         applyFilters();
-    });
-    showAllBtn.addEventListener('click', function() {
-        search.value = '';
-        filter.value = '';
-        selectedBrands.clear();
-        renderBrandFilters();
-        applyFilters();
-    });
+    }
+
+    clearBtn.addEventListener('click', clearFilters);
+    document.getElementById('showAllBtn').addEventListener('click', clearFilters);
+    // Quita las marcas seleccionadas y vuelve a mostrar los resultados.
     clearBrandsBtn.addEventListener('click', function () {
         selectedBrands.clear();
         renderBrandFilters();
@@ -583,7 +714,7 @@
     const savedInventory = savedInventoryText
         ? JSON.parse(savedInventoryText)
         : { added: [], deleted: [] };
-    const offerCarIds = ['seat-leon-fr', 'ford-mustang', 'audi-q5'];
+    const offerCarIds = ['ford-mustang', 'audi-q5'];
     const offerDiscount = 15000;
     const generalDiscountRate = 0.05;
 
@@ -591,8 +722,10 @@
         throw new Error('No se pudo leer el catálogo administrado en este navegador.');
     }
 
+    // Dibuja las etiquetas de un coche en el contenedor indicado.
     function renderCarTags(container, tags) {
         container.replaceChildren();
+        // Crea una etiqueta visible por cada texto válido.
         (Array.isArray(tags) ? tags : []).forEach(function (tag, index) {
             if (typeof tag !== 'string' || !tag.trim()) {
                 return;
@@ -602,8 +735,10 @@
             badge.textContent = tag.trim();
             container.appendChild(badge);
         });
+        if (container.lastElementChild) container.lastElementChild.classList.remove('me-1');
     }
 
+    // Quita del catálogo los coches que se eliminaron desde administración.
     savedInventory.deleted.forEach(function (carId) {
         const card = document.querySelector('[data-car-id="' + carId + '"]');
         if (card) {
@@ -611,6 +746,7 @@
         }
     });
 
+    // Aplica al HTML los cambios guardados para los coches existentes.
     Object.entries(savedInventory.updated || {}).forEach(function ([carId, updates]) {
         const card = document.querySelector('[data-car-id="' + carId + '"]');
         if (!card || !updates) {
@@ -661,6 +797,7 @@
         }
     });
 
+    // Crea una tarjeta para cada coche añadido desde administración.
     savedInventory.added.forEach(function (car) {
         if (!car || typeof car.id !== 'string' || typeof car.name !== 'string'
             || !Number.isFinite(Number(car.price)) || !Number.isInteger(Number(car.year))) {
@@ -674,13 +811,9 @@
             filter.appendChild(yearOption);
         }
 
-        const card = document.createElement('div');
-        card.className = 'col-sm-6 col-lg-4 car-card';
+        const card = document.getElementById('catalogCarTemplate').content.firstElementChild.cloneNode(true);
         card.dataset.carId = car.id;
-        const cardBody = document.createElement('div');
-        cardBody.className = 'card h-100';
-        const image = document.createElement('img');
-        image.className = 'card-img-top';
+        const image = card.querySelector('.card-img-top');
         image.alt = car.name;
         const imagePath = typeof car.image === 'string' ? car.image.trim() : '';
         if (/^(https?:\/\/|img\/)[^\s]+$/i.test(imagePath)) {
@@ -689,58 +822,29 @@
             image.src = 'img/LogoDC.png';
             image.alt = 'Imagen no disponible';
         }
-
-        const body = document.createElement('div');
-        body.className = 'card-body d-flex flex-column';
-        const heading = document.createElement('div');
-        heading.className = 'd-flex justify-content-between align-items-center mb-2';
-        const title = document.createElement('h5');
-        title.className = 'card-title mb-0';
-        title.textContent = car.name;
-        const year = document.createElement('span');
-        year.className = 'badge badge-soft';
-        year.textContent = String(car.year);
-        heading.append(title, year);
-
-        const details = document.createElement('p');
-        details.className = 'text-muted mb-2';
-        details.textContent = car.description || 'Vehículo seleccionado';
-        const tagContainer = document.createElement('div');
-        tagContainer.className = 'mb-3';
-        renderCarTags(tagContainer, car.tags);
-        const price = document.createElement('p');
-        price.className = 'price mb-3';
+        card.querySelector('.card-title').textContent = car.name;
+        card.querySelector('.badge-soft').textContent = String(car.year);
+        card.querySelector('.text-muted').textContent = car.description || 'Vehículo seleccionado';
+        renderCarTags(card.querySelector('.card-body > .mb-3'), car.tags);
+        const price = card.querySelector('.price');
         price.dataset.basePrice = String(Number(car.price));
         price.textContent = 'Desde ' + new Intl.NumberFormat('es-ES').format(Number(car.price)) + ' €';
-
-        const buttons = document.createElement('div');
-        buttons.className = 'mt-auto d-flex justify-content-start align-items-center gap-2';
-        const request = document.createElement('a');
-        request.href = 'contacto.html';
-        request.className = 'btn btn-primary btn-sm';
-        request.textContent = 'Solicitar';
-        const specButton = document.createElement('button');
-        specButton.type = 'button';
-        specButton.className = 'btn btn-primary btn-sm';
+        const specButton = card.querySelector('[data-bs-target="#specModal"]');
         specButton.dataset.bsToggle = 'modal';
-        specButton.dataset.bsTarget = '#specModal';
         specButton.dataset.title = car.name;
         specButton.dataset.year = String(car.year);
         specButton.dataset.desc = car.description || 'Vehículo disponible en el catálogo de Deluxe Cars.';
         specButton.dataset.price = price.textContent;
         specButton.dataset.img = image.src;
         specButton.dataset.specs = Array.isArray(car.specs) ? car.specs.join('|') : '';
-        specButton.textContent = 'Ficha';
-        buttons.append(request, specButton);
-        body.append(heading, details, tagContainer, price, buttons);
-        cardBody.append(image, body);
-        card.appendChild(cardBody);
+        addWatermarks(card);
         document.getElementById('carsGrid').appendChild(card);
     });
 
     renderBrandFilters();
     applyFilters();
 
+    // Calcula y muestra el precio final y los descuentos del coche.
     function applyCatalogPrice(card) {
         const price = card.querySelector('.price');
         let basePrice = Number(price.dataset.basePrice);
@@ -748,28 +852,37 @@
             basePrice = Number(price.textContent.replace(/[^\d]/g, ''));
             price.dataset.basePrice = String(basePrice);
         }
+        const isSeatLeon = card.dataset.carId === 'seat-leon-fr';
         const discountedPrice = Math.round(basePrice * (1 - generalDiscountRate));
-        const finalPrice = offerCarIds.includes(card.dataset.carId)
-            ? Math.max(1, discountedPrice - offerDiscount)
-            : discountedPrice;
+        const finalPrice = isSeatLeon
+            ? basePrice
+            : offerCarIds.includes(card.dataset.carId)
+                ? Math.max(1, discountedPrice - offerDiscount)
+                : discountedPrice;
         const formatter = new Intl.NumberFormat('es-ES');
         price.dataset.currentPrice = String(finalPrice);
         price.replaceChildren();
 
-        const previousPrice = document.createElement('del');
-        previousPrice.className = 'price-previous d-block';
-        previousPrice.textContent = 'Desde ' + formatter.format(basePrice) + ' €';
-        const offerPrice = document.createElement('span');
-        offerPrice.className = 'price-offer d-block';
-        offerPrice.textContent = 'Desde ' + formatter.format(finalPrice) + ' €';
-        price.append(previousPrice, offerPrice);
+        if (isSeatLeon) {
+            price.textContent = 'Desde ' + formatter.format(finalPrice) + ' €';
+        } else {
+            const previousPrice = document.createElement('del');
+            previousPrice.className = 'price-previous d-block';
+            previousPrice.textContent = 'Desde ' + formatter.format(basePrice) + ' €';
+            const offerPrice = document.createElement('span');
+            offerPrice.className = 'price-offer d-block';
+            offerPrice.textContent = 'Desde ' + formatter.format(finalPrice) + ' €';
+            price.append(previousPrice, offerPrice);
+        }
 
         const specButton = card.querySelector('[data-bs-target="#specModal"]');
+        // Actualiza el precio que mostrará la ficha del coche.
         if (specButton) {
             specButton.dataset.price = formatter.format(finalPrice) + ' €';
         }
     }
 
+    // Calcula los precios de todas las tarjetas al cargar el catálogo.
     document.querySelectorAll('#carsGrid .car-card').forEach(applyCatalogPrice);
 
     const financeModal = new bootstrap.Modal(document.getElementById('financeModal'));
@@ -783,6 +896,7 @@
     });
     let selectedCarPrice = 0;
 
+    // Añade a cada tarjeta los botones de financiación y favoritos.
     document.querySelectorAll('.car-card').forEach(function (card) {
         const buttonContainer = card.querySelector('.mt-auto');
         const title = card.querySelector('.card-title').textContent.trim();
@@ -792,6 +906,7 @@
         financeButton.type = 'button';
         financeButton.className = 'btn btn-primary btn-sm ms-md-auto';
         financeButton.textContent = 'Calcular presupuesto';
+        // Abre el simulador de financiación con el precio de este coche.
         financeButton.addEventListener('click', function () {
             selectedCarPrice = price;
             document.getElementById('financeCarName').textContent = title;
@@ -808,6 +923,7 @@
         favoriteButton.setAttribute('aria-label', 'Añadir a favoritos');
         favoriteButton.setAttribute('title', 'Añadir a favoritos');
         favoriteButton.innerHTML = '&#9825;';
+        // Guarda o quita el coche de los favoritos de la cuenta activa.
         favoriteButton.addEventListener('click', function () {
             const sessionText = sessionStorage.getItem('deluxeCarsSession')
                 || localStorage.getItem('deluxeCarsSession');
@@ -851,6 +967,7 @@
         updateFavoriteButton(favoriteButton, isFavoriteForCurrentUser(card.dataset.carId));
     });
 
+    // Indica si el coche ya está guardado por la cuenta activa.
     function isFavoriteForCurrentUser(carId) {
         const sessionText = sessionStorage.getItem('deluxeCarsSession')
             || localStorage.getItem('deluxeCarsSession');
@@ -866,6 +983,7 @@
         return Array.isArray(favorites) && favorites.some(car => car.id === carId);
     }
 
+    // Cambia el corazón y el texto accesible según el estado del favorito.
     function updateFavoriteButton(button, isFavorite) {
         button.innerHTML = isFavorite ? '&#9829;' : '&#9825;';
         button.setAttribute('aria-label', isFavorite ? 'Quitar de favoritos' : 'Añadir a favoritos');
@@ -873,6 +991,7 @@
         button.setAttribute('aria-pressed', String(isFavorite));
     }
 
+    // Calcula la cuota mensual y el total del coche seleccionado en el catálogo.
     function calculateCarFinancing() {
         const downPayment = Number(financeDownPayment.value);
         const months = Number(financeMonths.value);
@@ -900,6 +1019,7 @@
     financeMonths.addEventListener('change', calculateCarFinancing);
 
     const specModal = document.getElementById('specModal');
+    // Muestra en la ventana la ficha del coche seleccionado.
     specModal.addEventListener('show.bs.modal', function (event) {
         const button = event.relatedTarget;
         const title = button.dataset.title || '';
@@ -908,15 +1028,20 @@
         const price = button.dataset.price || '';
         const img = button.dataset.img || 'https://source.unsplash.com/900x500/?car';
         const specs = (button.dataset.specs || '').split('|').filter(Boolean);
+        const card = button.closest('.car-card');
 
         document.getElementById('specTitle').textContent = title;
         document.getElementById('specYear').textContent = year ? ('Año: ' + year) : '';
         document.getElementById('specPrice').textContent = price;
         document.getElementById('specDesc').textContent = desc;
-        document.getElementById('specImg').src = img;
+        const specImage = document.getElementById('specImg');
+        specImage.src = img;
+        specImage.classList.toggle('seat-leon-fr-modal-image',
+            card && card.dataset.carId === 'seat-leon-fr');
 
         const specList = document.getElementById('specList');
         specList.innerHTML = '';
+        // Añade una línea a la lista por cada característica del coche.
         specs.forEach(function (item) {
             const li = document.createElement('li');
             li.className = 'list-group-item';

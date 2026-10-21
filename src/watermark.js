@@ -1,33 +1,22 @@
-(function () {
-    function addWatermark(image) {
-        if (image.parentElement.classList.contains('dealer-watermark')) {
-            return;
-        }
+// Añade la marca de agua a las imágenes dentro del elemento indicado.
+function addWatermarks(root) {
+    var images = root.querySelectorAll('.card-img-top, #modalImg, #specImg');
 
-        const wrapper = document.createElement('div');
+    for (var i = 0; i < images.length; i++) {
+        var image = images[i];
+        if (image.parentElement.classList.contains('dealer-watermark')) continue;
+
+        var wrapper = document.createElement('div');
         wrapper.className = 'dealer-watermark';
         image.parentNode.insertBefore(wrapper, image);
         wrapper.appendChild(image);
 
-        const label = document.createElement('span');
+        var label = document.createElement('span');
         label.className = 'dealer-watermark__label';
         label.textContent = 'DELUXE CARS';
         wrapper.appendChild(label);
     }
+}
 
-    function scanImages(root) {
-        if (root instanceof Element && root.matches('.card-img-top, #modalImg, #specImg')) {
-            addWatermark(root);
-        }
-        if (root.querySelectorAll) {
-            root.querySelectorAll('.card-img-top, #modalImg, #specImg').forEach(addWatermark);
-        }
-    }
-
-    scanImages(document);
-    new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
-            mutation.addedNodes.forEach(scanImages);
-        });
-    }).observe(document.body, { childList: true, subtree: true });
-})();
+// Marca las imágenes que ya están en la página al cargarla.
+addWatermarks(document);

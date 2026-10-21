@@ -1,3 +1,4 @@
+// Páginas que aparecen en el menú común del sitio.
 const pages = [
     ['index.html', 'Inicio'],
     ['modelos.html', 'Catálogo'],
@@ -7,6 +8,7 @@ const pages = [
     ['acceso.html', 'Acceso']
 ];
 const currentPage = location.pathname.split('/').pop() || 'index.html';
+// Crea los enlaces y marca como activa la página que se está visitando.
 const navigation = pages.map(([href, label]) =>
     `<li class="nav-item"><a class="nav-link${currentPage === href ? ' active' : ''}" href="${href}"${currentPage === href ? ' aria-current="page"' : ''}>${label}</a></li>`
 ).join('');
@@ -14,7 +16,10 @@ const navigation = pages.map(([href, label]) =>
 document.body.insertAdjacentHTML('afterbegin', `
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">Deluxe Cars</a>
+            <a class="navbar-brand fw-bold d-inline-flex align-items-center gap-2" href="index.html">
+                <img src="img/LogoDC.png" alt="" width="32" height="32">
+                <span>Deluxe Cars</span>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain"
                     aria-controls="navMain" aria-expanded="false" aria-label="Abrir navegación">
                 <span class="navbar-toggler-icon"></span>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Favoritos - Concesionario</title>
     <link rel="icon" type="image/png" href="img/LogoDC.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="watermark.css" rel="stylesheet">
     <style>
 
@@ -52,9 +52,27 @@
     <div id="favoritesGrid" class="row g-4"></div>
 </main>
 
+<template id="favoriteCardTemplate">
+    <div class="col-sm-6 col-lg-4">
+        <div class="card h-100">
+            <img class="card-img-top" alt="">
+            <div class="card-body d-flex flex-column">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h2 class="h5 mb-0"></h2>
+                    <span class="badge text-bg-primary"></span>
+                </div>
+                <p class="text-muted mb-2"></p>
+                <div class="mb-3"></div>
+                <p class="text-primary fw-bold mt-auto mb-3"></p>
+                <button type="button" class="btn btn-outline-danger btn-sm favorite-button align-self-start"
+                        title="Quitar de favoritos">♥</button>
+            </div>
+        </div>
+    </div>
+</template>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
 <script src="watermark.js"></script>
 <script>
     const sessionText = sessionStorage.getItem('deluxeCarsSession')
@@ -63,6 +81,7 @@
     const loginNotice = document.getElementById('loginNotice');
     const emptyNotice = document.getElementById('emptyNotice');
 
+    // Muestra los coches guardados o el aviso correspondiente si no hay sesión o favoritos.
     function renderFavorites() {
         favoritesGrid.replaceChildren();
         if (!sessionText) {
@@ -86,61 +105,40 @@
         }
         emptyNotice.classList.toggle('d-none', favorites.length > 0);
 
-        favorites.forEach(car => {
+        // Crea una tarjeta por cada coche guardado como favorito.
+        favorites.forEach(function (car) {
             if (!car || typeof car.id !== 'string' || typeof car.name !== 'string') {
                 return;
             }
-            const column = document.createElement('div');
-            column.className = 'col-sm-6 col-lg-4';
-            const card = document.createElement('div');
-            card.className = 'card h-100';
-            const image = document.createElement('img');
-            image.className = 'card-img-top';
+            const column = document.getElementById('favoriteCardTemplate').content.firstElementChild.cloneNode(true);
+            const image = column.querySelector('.card-img-top');
             image.alt = car.name;
             image.src = typeof car.image === 'string' && /^(https?:\/\/|img\/)[^\s]+$/i.test(car.image)
                 ? car.image
                 : 'img/LogoDC.png';
-            const body = document.createElement('div');
-            body.className = 'card-body d-flex flex-column';
-            const heading = document.createElement('div');
-            heading.className = 'd-flex justify-content-between align-items-center mb-2';
-            const title = document.createElement('h2');
-            title.className = 'h5 mb-0';
-            title.textContent = car.name;
-            const year = document.createElement('span');
-            year.className = 'badge text-bg-primary';
-            year.textContent = String(car.year || '');
-            heading.append(title, year);
-
-            const description = document.createElement('p');
-            description.className = 'text-muted mb-2';
-            description.textContent = car.description || '';
-            const tags = document.createElement('div');
-            tags.className = 'mb-3';
-            (Array.isArray(car.tags) ? car.tags : []).forEach((tag, index) => {
+            column.querySelector('h2').textContent = car.name;
+            column.querySelector('.badge').textContent = String(car.year || '');
+            column.querySelector('.text-muted').textContent = car.description || '';
+            const tags = column.querySelector('.card-body > .mb-3');
+            // Muestra las etiquetas guardadas para el coche.
+            (Array.isArray(car.tags) ? car.tags : []).forEach(function (tag) {
                 const badge = document.createElement('span');
-                badge.className = 'badge text-bg-light' + (index < car.tags.length - 1 ? ' me-1' : '');
+                badge.className = 'badge text-bg-light me-1';
                 badge.textContent = tag;
                 tags.appendChild(badge);
             });
-            const price = document.createElement('p');
-            price.className = 'text-primary fw-bold mt-auto mb-3';
-            price.textContent = 'Desde ' + new Intl.NumberFormat('es-ES').format(Number(car.price) || 0) + ' €';
-            const removeButton = document.createElement('button');
-            removeButton.type = 'button';
-            removeButton.className = 'btn btn-outline-danger btn-sm favorite-button align-self-start';
-            removeButton.innerHTML = '&#9829;';
+            if (tags.lastElementChild) tags.lastElementChild.classList.remove('me-1');
+            column.querySelector('.text-primary').textContent =
+                'Desde ' + new Intl.NumberFormat('es-ES').format(Number(car.price) || 0) + ' €';
+            const removeButton = column.querySelector('button');
             removeButton.setAttribute('aria-label', 'Quitar ' + car.name + ' de favoritos');
-            removeButton.title = 'Quitar de favoritos';
-            removeButton.addEventListener('click', () => {
+            // Quita este coche de la lista guardada y vuelve a dibujar las tarjetas.
+            removeButton.addEventListener('click', function () {
                 const updatedFavorites = favorites.filter(item => item.id !== car.id);
                 localStorage.setItem(favoritesKey, JSON.stringify(updatedFavorites));
                 renderFavorites();
             });
-
-            body.append(heading, description, tags, price, removeButton);
-            card.append(image, body);
-            column.appendChild(card);
+            addWatermarks(column);
             favoritesGrid.appendChild(column);
         });
     }
