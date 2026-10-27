@@ -1,0 +1,92 @@
+.home-hero {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    background:
+        radial-gradient(circle at 82% 18%, rgba(86, 148, 190, 0.35), transparent 28rem),
+        linear-gradient(125deg, #0d1b2a 0%, #1b263b 55%, #2a4d69 100%);
+}
+
+.home-hero::after {
+    position: absolute;
+    right: -5rem;
+    bottom: -11rem;
+    width: 28rem;
+    height: 28rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    content: "";
+    box-shadow: 0 0 0 3rem rgba(255, 255, 255, 0.025), 0 0 0 6rem rgba(255, 255, 255, 0.02);
+    pointer-events: none;
+}
+
+.home-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+}
+
+.home-eyebrow {
+    color: #a9d8f5;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.home-section {
+    padding-block: 4.5rem;
+}
+
+.home-section-heading {
+    max-width: 680px;
+}
+
+.home-feature-card {
+    height: 100%;
+    padding: 1.5rem;
+    border: 1px solid rgba(27, 38, 59, 0.08);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+}
+
+.home-feature-icon {
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    place-items: center;
+    border-radius: 0.9rem;
+    color: #17466a;
+    background: #e4f1f8;
+    font-size: 1.4rem;
+}
+
+.home-promise {
+    color: #fff;
+    border-radius: 1.25rem;
+    background: linear-gradient(120deg, #16314a, #285474);
+}
+
+.home-offers {
+    padding-top: 4.5rem;
+    padding-bottom: 5rem;
+    background: rgba(255, 255, 255, 0.38);
+}
+
+.home-offer-label {
+    color: #9c341f;
+    background: #fff0e8;
+}
+
+.card {
+    overflow: hidden;
+}
+
+.car-card[data-car-id="seat-leon-fr"] .card-img-top,
+.seat-leon-fr-modal-image {
+    object-position: center 66%;
+}
+
+.home-modal-image {
+    height: 300px;
+    object-fit: cover;
+}

@@ -1,4 +1,4 @@
-// Añade la marca de agua a las imágenes dentro del elemento indicado.
+// Añade la marca de agua a las imágenes del contenedor indicado y evita duplicarla.
 function addWatermarks(root) {
     var images = root.querySelectorAll('.card-img-top, #modalImg, #specImg');
 

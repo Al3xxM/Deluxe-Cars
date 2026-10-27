@@ -1,0 +1,83 @@
+.access-main {
+    padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+
+.access-intro {
+    position: relative;
+    overflow: hidden;
+    min-height: 100%;
+    padding: clamp(1.75rem, 4vw, 3rem);
+    border-radius: 1.25rem;
+    color: #fff;
+    background:
+        radial-gradient(circle at 85% 10%, rgba(86, 148, 190, 0.3), transparent 18rem),
+        linear-gradient(135deg, #0d1b2a, #1b263b 55%, #2a4d69);
+}
+
+.access-intro::after {
+    position: absolute;
+    right: -5rem;
+    bottom: -11rem;
+    width: 23rem;
+    height: 23rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    content: "";
+    box-shadow: 0 0 0 2.5rem rgba(255, 255, 255, 0.025), 0 0 0 5rem rgba(255, 255, 255, 0.02);
+    pointer-events: none;
+}
+
+.access-intro-content {
+    position: relative;
+    z-index: 1;
+}
+
+.access-card {
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(12px);
+}
+
+.form-control {
+    border-radius: 0.7rem;
+    min-height: 44px;
+}
+
+.access-tabs {
+    padding: 0.35rem;
+    border-radius: 0.9rem;
+    background: #edf1f5;
+}
+
+.access-tabs .nav-link {
+    min-height: 42px;
+    border-radius: 0.65rem;
+    color: #526170;
+    font-weight: 600;
+}
+
+.access-tabs .nav-link.active {
+    color: #17466a;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.09);
+}
+
+.admin-section-card {
+    height: 100%;
+    border: 1px solid rgba(27, 38, 59, 0.08);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.78);
+}
+
+.admin-feature-option {
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.admin-feature-option.is-selected {
+    border-color: rgba(13, 110, 253, 0.55) !important;
+    background: #f0f6ff;
+}
+
+.admin-table-wrap {
+    max-height: 32rem;
+}

@@ -6,37 +6,7 @@
     <title>Contacto - Concesionario</title>
     <link rel="icon" type="image/png" href="img/LogoDC.png">
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <style>
-
-
-        .info-card {
-            background: #ffffff;
-            border: 1px solid rgba(148, 163, 184, 0.2);
-            border-radius: 1rem;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-        }
-
-        .form-card {
-            background: rgba(255, 255, 255, 0.96);
-            border: 1px solid rgba(148, 163, 184, 0.2);
-            border-radius: 1rem;
-            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.12);
-        }
-
-
-        .icon-box {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #e8f0ff;
-            color: #0d6efd;
-            font-size: 1.2rem;
-        }
-
-</style>
+    <link rel="stylesheet" href="contacto.css">
     <link rel="stylesheet" href="site.css">
 </head>
 <body>
@@ -170,24 +140,7 @@
 
 
 <script src="../js/bootstrap.bundle.min.js"></script>
-<script>
-    const contactForm = document.getElementById('contactForm');
-    const contactFeedback = document.getElementById('contactFeedback');
-    const telefono = document.getElementById('telefono');
-
-    // Mantiene solo los números en el campo de teléfono.
-    telefono.addEventListener('input', function () {
-        this.value = this.value.replace(/\D/g, '');
-    });
-
-    // Muestra la confirmación; este formulario de demostración no envía datos.
-    contactForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        contactFeedback.textContent = 'Formulario validado. Esta demostración no envía datos a un servidor.';
-        contactFeedback.classList.remove('d-none');
-        contactForm.reset();
-    });
-</script>
-    <script src="site.js"></script>
+<script src="contacto.js"></script>
+<script src="site.js"></script>
 </body>
 </html>

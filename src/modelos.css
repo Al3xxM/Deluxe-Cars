@@ -1,0 +1,69 @@
+.card {
+    overflow: hidden;
+}
+
+.car-card[data-car-id="seat-ibiza-fr"] .card-img-top {
+    object-position: center 68%;
+}
+
+.car-card[data-car-id="seat-leon-fr"] .card-img-top,
+.seat-leon-fr-modal-image {
+    object-position: center 66%;
+}
+
+.catalog-spec-image {
+    height: 300px;
+    object-fit: cover;
+}
+
+.search-bar,
+.compact-filter,
+.compact-action {
+    border-radius: 0.8rem;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    min-height: 42px;
+    padding: 0.55rem 0.85rem;
+    font-size: 0.92rem;
+}
+
+.compact-action {
+    white-space: nowrap;
+    padding-inline: 0.9rem;
+}
+
+.brand-filter-dropdown {
+    flex: 1 1 10rem;
+}
+
+.filter-toolbar #filter {
+    flex: 1 1 10rem;
+    width: auto;
+}
+
+.brand-filter-menu {
+    width: 100%;
+    max-height: 16rem;
+    overflow-y: auto;
+}
+
+.brand-filter-option {
+    cursor: pointer;
+    padding: 0.4rem 0.85rem;
+}
+
+.finance-result {
+    background: #0d1b2a;
+    color: white;
+    border-radius: 0.8rem;
+}
+
+.car-card .mt-auto {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.favorite-button {
+    min-width: 2rem;
+    line-height: 1;
+    font-size: 1.15rem;
+}

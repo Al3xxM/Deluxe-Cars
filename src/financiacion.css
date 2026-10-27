@@ -1,0 +1,14 @@
+.finance-card, .result-card {
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 1rem;
+    box-shadow: 0 12px 35px rgba(15, 23, 42, 0.1);
+}
+.result-card {
+    background: #0d1b2a;
+    color: white;
+}
+.form-control, .form-select {
+    border-radius: 0.7rem;
+    min-height: 44px;
+}

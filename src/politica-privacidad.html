@@ -6,15 +6,7 @@
     <title>Política de privacidad</title>
     <link rel="icon" type="image/png" href="img/LogoDC.png">
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <style>
-
-        .card {
-            border: none;
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
-        }
-
-</style>
+    <link rel="stylesheet" href="politica-privacidad.css">
     <link rel="stylesheet" href="site.css">
 </head>
 <body>
@@ -22,33 +14,91 @@
 
 <header class="catalog-hero py-4 mb-4">
     <div class="container">
-        <h1 class="h3 mb-1">Política de privacidad</h1>
-        <p class="mb-0 text-white-50">Información sobre el tratamiento de tus datos.</p>
+        <p class="text-uppercase fw-semibold small mb-2 text-info">Transparencia y confianza</p>
+        <h1 class="display-5 fw-bold mb-2">Política de privacidad</h1>
+        <p class="mb-0 text-white-50">Qué información utiliza esta web de demostración y cómo puedes gestionarla.</p>
     </div>
 </header>
 
 <main class="container my-5">
-    <div class="card p-4 p-md-5">
-        <h2 class="h4 mb-3">1. Información que tratamos</h2>
-        <p class="text-muted">Recopilamos los datos que nos facilitas a través del formulario de contacto, como nombre, email, teléfono y mensaje.</p>
+    <div class="row g-4 g-lg-5">
+        <aside class="col-lg-3">
+            <nav class="card border-0 p-3 p-lg-4 position-sticky privacy-nav"
+                 aria-label="Secciones de la política de privacidad">
+                <h2 class="h6 fw-bold mb-3">En esta página</h2>
+                <div class="nav nav-pills flex-column gap-1">
+                    <a class="nav-link" href="#alcance">Alcance de esta política</a>
+                    <a class="nav-link" href="#datos">Datos y almacenamiento</a>
+                    <a class="nav-link" href="#finalidad">Uso de la información</a>
+                    <a class="nav-link" href="#terceros">Servicios de terceros</a>
+                    <a class="nav-link" href="#conservacion">Conservación y control</a>
+                    <a class="nav-link" href="#seguridad">Seguridad</a>
+                    <a class="nav-link" href="#derechos">Tus derechos</a>
+                    <a class="nav-link" href="#contacto-privacidad">Contacto</a>
+                </div>
+            </nav>
+        </aside>
+        <div class="col-lg-9">
 
-        <h2 class="h4 mt-4 mb-3">2. Finalidad del tratamiento</h2>
-        <p class="text-muted">Utilizamos estos datos para responder a tus consultas, gestionar solicitudes de información y ofrecerte atención personalizada.</p>
+            <article class="card border-0 p-4 p-md-5">
+                <p class="small text-muted mb-4">Última actualización: 27 de octubre de 2026</p>
 
-        <h2 class="h4 mt-4 mb-3">3. Seguridad</h2>
-        <p class="text-muted">Aplicamos medidas razonables para proteger tus datos frente a accesos no autorizados, pérdidas o uso indebido.</p>
+                <section id="alcance" class="mb-4">
+                    <h2 class="h4 fw-bold">1. Alcance y responsable</h2>
+                    <p class="text-muted mb-0">Deluxe Cars es un proyecto demostrativo para mostrar un catálogo de vehículos y funciones básicas de cuenta. Esta versión no cuenta con un servicio de atención conectado a una base de datos. Por ello, no se debe interpretar el nombre, la dirección o el correo que aparecen en la web como datos verificados de una entidad responsable.</p>
+                </section>
 
-        <h2 class="h4 mt-4 mb-3">4. Derechos del usuario</h2>
-        <p class="text-muted">Puedes solicitar acceso, rectificación, eliminación o limitación del tratamiento de tus datos contactando con nosotros.</p>
+                <section id="datos" class="mb-4">
+                    <h2 class="h4 fw-bold">2. Datos y almacenamiento en el navegador</h2>
+                    <p class="text-muted">Según las funciones que utilices, el navegador puede guardar en el almacenamiento local de esta web:</p>
+                    <ul class="text-muted">
+                        <li><strong>Cuenta de demostración:</strong> nombre, correo electrónico y una huella de la contraseña creada mediante un hash con sal. La contraseña no se guarda como texto normal, pero este mecanismo de demostración no debe considerarse adecuado para proteger una cuenta real.</li>
+                        <li><strong>Sesión:</strong> información necesaria para mantener el acceso. Puede permanecer solo en la sesión actual o guardarse en el dispositivo si marcas «Recordarme».</li>
+                        <li><strong>Favoritos:</strong> datos básicos de los coches que decides guardar, asociados al correo de la cuenta local.</li>
+                        <li><strong>Administración:</strong> coches añadidos, cambios del catálogo, vehículos eliminados y selección de coches destacados de Inicio.</li>
+                    </ul>
+                    <p class="text-muted mb-0">Estos datos permanecen en el perfil del navegador y no se sincronizan con otros dispositivos ni se transmiten al concesionario.</p>
+                </section>
 
-        <h2 class="h4 mt-4 mb-3">5. Contacto</h2>
-        <p class="text-muted mb-0">Si tienes dudas sobre esta política, puedes escribirnos a prueba@concesionario.com o visitar la página de <a href="contacto.html">contacto</a>.</p>
+                <section id="finalidad" class="mb-4">
+                    <h2 class="h4 fw-bold">3. Finalidad y formulario de contacto</h2>
+                    <p class="text-muted">El almacenamiento local permite probar las funciones de registro, inicio de sesión, favoritos y gestión del catálogo. El formulario de contacto solo comprueba que los campos tengan un formato válido: al enviarlo, muestra una confirmación y limpia los campos, pero no remite el mensaje ni sus datos a ninguna persona o servidor.</p>
+                    <p class="text-muted mb-0">La web no implementa pagos, contratación ni envío de solicitudes comerciales.</p>
+                </section>
+
+                <section id="terceros" class="mb-4">
+                    <h2 class="h4 fw-bold">4. Enlaces e imágenes de terceros</h2>
+                    <p class="text-muted mb-0">Algunas imágenes del catálogo pueden cargarse desde sitios externos. Si el navegador solicita una de esas imágenes, el proveedor correspondiente podría recibir datos técnicos de la conexión, como la dirección IP. La disponibilidad y las prácticas de privacidad de esos sitios no dependen de Deluxe Cars. El resto de los recursos de Bootstrap se incluye en el propio proyecto.</p>
+                </section>
+
+                <section id="conservacion" class="mb-4">
+                    <h2 class="h4 fw-bold">5. Conservación y control de tus datos</h2>
+                    <p class="text-muted">Los datos locales se conservan hasta que los elimines o borres los datos del sitio desde la configuración del navegador. Puedes cerrar la sesión desde la página de Acceso y quitar coches individualmente de Favoritos. Para borrar cuentas de demostración, selecciones y cambios de catálogo, elimina el almacenamiento de este sitio en tu navegador.</p>
+                    <p class="text-muted mb-0">Borrar los datos del navegador es una acción local y no se puede deshacer; también elimina otros datos de demostración asociados a esta web.</p>
+                </section>
+
+                <section id="seguridad" class="mb-4">
+                    <h2 class="h4 fw-bold">6. Seguridad y uso responsable</h2>
+                    <p class="text-muted mb-0">El acceso de administrador utiliza credenciales públicas de demostración y los datos se guardan en el navegador. No uses información personal sensible, contraseñas reutilizadas ni datos que necesiten protección. No emplees las funciones de esta versión para gestionar un catálogo o cuentas reales.</p>
+                </section>
+
+                <section id="derechos" class="mb-4">
+                    <h2 class="h4 fw-bold">7. Derechos de las personas</h2>
+                    <p class="text-muted mb-0">En un servicio real, las personas pueden ejercer los derechos que les reconozca la normativa aplicable y deben disponer de la identidad y los datos de contacto del responsable. Esta demo no recibe solicitudes ni dispone de un sistema para localizar o borrar datos en un servidor, porque no los almacena allí.</p>
+                </section>
+
+                <section id="contacto-privacidad">
+                    <h2 class="h4 fw-bold">8. Contacto y cambios de esta política</h2>
+                    <p class="text-muted mb-0">Para consultas sobre la demostración, visita la página de <a href="contacto.html">contacto</a>. Antes de publicar el proyecto como servicio real, se deben sustituir los datos de contacto de ejemplo e incluir la identidad del responsable, las finalidades y bases jurídicas aplicables, los plazos de conservación y los canales para ejercer derechos.</p>
+                </section>
+            </article>
+        </div>
     </div>
 </main>
 
 
 
 <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="site.js"></script>
+<script src="site.js"></script>
 </body>
 </html>
