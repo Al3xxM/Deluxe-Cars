@@ -5,7 +5,8 @@ const pages = [
 ['favoritos.html', 'Favoritos'],
 ['financiacion.html', 'Financiación'],
 ['contacto.html', 'Contacto'],
-['acceso.html', 'Acceso']
+['acceso.html', 'Acceso'],
+['admin.html', 'Administración']
 ];
 const currentPage = location.pathname.split('/').pop() || 'index.html';
 // Crea los enlaces y marca como activa la página que se está visitando.

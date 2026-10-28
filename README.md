@@ -12,10 +12,11 @@ Bootstrap está incluido en `css` y `js`; no hace falta cargarlo desde Internet.
 
 - `src/index.html`: portada y coches destacados.
 - `src/modelos.html`: catálogo, filtros, fichas, favoritos y simulador rápido.
-- `src/acceso.html`: registro, inicio de sesión y gestión de demostración del catálogo.
+- `src/acceso.html`: registro e inicio de sesión para usuarios.
+- `src/admin.html`: acceso independiente y herramientas de administración del catálogo y los coches destacados.
 - `src/financiacion.html`: calculadora de cuotas.
 - `src/contacto.html`, `src/favoritos.html` y `src/politica-privacidad.html`: contacto, favoritos y política.
-- Cada página tiene su propio archivo CSS (`src/index.css`, `src/modelos.css`, etc.) para mantener separados sus estilos.
+- Cada página tiene su propio archivo CSS (`src/index.css`, `src/modelos.css`, `src/admin.css`, etc.) para mantener separados sus estilos.
 - `src/site.css` y `src/site.js`: estilos y navegación comunes, incluido el pie de página.
 - `src/catalog-data.js`: datos iniciales del catálogo compartidos por la portada, el catálogo y el panel de administración.
 - Cada página con comportamiento tiene su JavaScript externo (`src/index.js`, `src/modelos.js`, `src/acceso.js`, etc.); así el HTML contiene la estructura y carga los recursos en orden.
@@ -33,7 +34,8 @@ Todas las páginas cargan Bootstrap para los componentes interactivos del menú 
 | --- | --- |
 | `index.html` | `catalog-data.js` aporta los coches; `watermark.js` marca sus imágenes; `index.js` actualiza los coches destacados y sus precios y rellena las ventanas de detalles y ficha técnica. |
 | `modelos.html` | `watermark.js` marca las imágenes; `modelos.js` filtra y dibuja el catálogo, aplica los cambios guardados por administración, gestiona favoritos y calcula financiación. |
-| `acceso.html` | `catalog-data.js` aporta el catálogo inicial; `acceso.js` gestiona registro, inicio/cierre de sesión y las herramientas de demostración del administrador. |
+| `acceso.html` | `acceso.js` gestiona registro e inicio/cierre de sesión de los usuarios. |
+| `admin.html` | `catalog-data.js` aporta el catálogo inicial; `admin.js` gestiona el acceso de administrador y sus herramientas. |
 | `favoritos.html` | `watermark.js` marca las imágenes; `favoritos.js` muestra, elimina y actualiza los favoritos de la cuenta activa. |
 | `financiacion.html` | `financiacion.js` valida los datos y calcula la cuota, los intereses y el total. |
 | `contacto.html` | `contacto.js` limita el teléfono a números y valida el formulario de demostración; no envía datos a un servidor. |
